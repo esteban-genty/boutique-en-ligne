@@ -1,0 +1,86 @@
+
+:root{
+    --primary-color: #1C4CB7;
+    --secondary-color: #f0f0f0;
+    --text-color: #333;
+    --button-primary: #1E3A8A;
+    --button-secondary: #3B82F6;
+    --button-hover: #68A1FF;
+}
+
+
+
+
+
+
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+footer h2, footer h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+footer div {
+    margin-bottom: 20px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin: 5px 0;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}
+
+footer form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+footer form input, footer form textarea, footer form button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+footer form input, footer form textarea {
+    width: 100%;
+}
+
+footer form button {
+    background-color: white;
+    color: #1C4CB7;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+footer form button:hover {
+    background-color: #f0f0f0;
+}
+
+footer p {
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
