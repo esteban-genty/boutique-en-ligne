@@ -26,9 +26,9 @@ class AuthController
 
         // Redirection
         if ($user['is_admin']) {
-          header('Location: /admin/dashboard');
+          header('Location: /boutique-en-ligne/test.php');
         } else {
-          header('Location: /user/dashboard');
+          header('Location: /boutique-en-ligne/test.php');
         }
         exit;
       } else {

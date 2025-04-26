@@ -14,7 +14,7 @@
     <p style="color:red;"><?= $error ?></p>
   <?php endif; ?>
 
-  <form action="/login" method="POST">
+  <form action="/boutique-en-ligne/login" method="POST">
     <label>Email:</label>
     <input type="email" name="email" required><br>
 
