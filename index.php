@@ -17,6 +17,11 @@ switch ($uri) {
     $controller = new AuthController();
     $controller->logout();
     break;
+  case '/boutique-en-ligne/register':
+    $controller = new AuthController();
+    $controller->register();
+    break;
+
   default:
     echo "404 Not Found";
     break;
