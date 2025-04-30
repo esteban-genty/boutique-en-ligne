@@ -29,14 +29,14 @@
       </button>
     </div>
 
-    <!-- NAVIGATION HOMME / FEMME -->
+    <!-- HOMME / FEMME -->
     <nav class="main-nav">
       <ul>
         <li><a href="#">Homme</a></li>
         <li><a href="#">Femme</a></li>
       </ul>
     </nav>
-
+ <!-- HOMME / FEMME -->
     <div class="search-wrapper">
       <input type="text" placeholder="Rechercher" aria-label="Recherche"/>
     </div>
@@ -47,27 +47,42 @@
     </div>
   </div>
 </header>
-
-<!----
-<section class="promo-banner">
-  <p>-20% sur les produits en promo !</p>
-</section>--->
-
 <section class="promo-section">
-  <nav class="promo-menu">
-    <ul>
-      <li>Promo</li>
-      <li>Nouveauté</li>
-      <li>Tendances</li>
-      <li>Vetements</li>
-      <li>Chaussures</li>
-      <li>Accessoires</li>
+  <nav class="promo-menu" role="navigation" aria-label="Promo menu">
+    <!-- Bouton hamburger -->
+    <button id="promoBurger" class="promo-burger"
+            aria-controls="promoLinks" aria-expanded="false"
+            aria-label="Ouvrir le menu promo">
+      <span class="burger-bar" aria-hidden="true"></span>
+      <span class="burger-bar" aria-hidden="true"></span>
+      <span class="burger-bar" aria-hidden="true"></span>
+    </button>
+      <!-- Bouton hamburger -->
+
+    <ul id="promoLinks" class="promo-links">
+      <li><a href="#">Promo</a></li>
+      <li><a href="#">Vêtements</a></li>
+      <li><a href="#">Tendances</a></li>
+      <li><a href="#">Chaussures</a></li>
+      <li><a href="#">Accessoires</a></li>
+      <li><a href="#">Nouveauté</a></li>
     </ul>
   </nav>
 
-  <div class="promo-image">
-    <img src="../boutique-en-ligne/public/assets/img/banniere.jpg" alt="Collection" />
-    <button class="collection-button">Voir collection</button>
+  <div class="promo-video">
+    <video
+      class="banner-video"
+      poster="public/assets/img/banner.png"
+      autoplay muted loop playsinline preload="metadata"
+      aria-label="Vidéo de présentation de la collection"
+    >
+      <source src="public/assets/img/www.omni.com.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+    <div class="video-overlay">
+      <h1 class="video-title">Découvrez notre collection</h1>
+      <button class="collection-button">Voir collection</button>
+    </div>
   </div>
 </section>
 
