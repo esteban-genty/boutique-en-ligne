@@ -22,8 +22,9 @@ class AuthController
         session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_email'] = $user['email'];
         $_SESSION['is_admin'] = $user['is_admin'];
-        
+
         // echo '<pre>' . print_r($_SESSION, true) . '</pre>';
         // exit;
 
@@ -44,37 +45,38 @@ class AuthController
     }
   }
 
-  public function register() {
+  public function register()
+  {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $firstName = trim($_POST['first_name']);
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $password = $_POST['password'];
-        $confirmPassword = $_POST['confirm_password'];
+      $firstName = trim($_POST['first_name']);
+      $name = trim($_POST['name']);
+      $email = trim($_POST['email']);
+      $password = $_POST['password'];
+      $confirmPassword = $_POST['confirm_password'];
 
-        // Vérification simple
-        if ($password !== $confirmPassword) {
-            $error = "Passwords do not match.";
-            require '../app/views/auth/register.php';
-            return;
-        }
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $this->userModel->create([
-            'first_name' => $firstName,
-            'name' => $name,
-            'email' => $email,
-            'password' => $hashedPassword,
-            'is_admin' => 0
-        ]);
-
-        header('Location: /boutique-en-ligne/login');
-        exit;
-    } else {
+      // Vérification simple
+      if ($password !== $confirmPassword) {
+        $error = "Passwords do not match.";
         require '../app/views/auth/register.php';
+        return;
+      }
+
+      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+      $this->userModel->create([
+        'first_name' => $firstName,
+        'name' => $name,
+        'email' => $email,
+        'password' => $hashedPassword,
+        'is_admin' => 0
+      ]);
+
+      header('Location: /boutique-en-ligne/login');
+      exit;
+    } else {
+      require '../app/views/auth/register.php';
     }
-}
+  }
 
 
 
