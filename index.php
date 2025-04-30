@@ -77,10 +77,10 @@
       aria-label="Vidéo de présentation de la collection"
     >
       <source src="public/assets/img/www.omni.com.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la lecture vidéo.
+
     </video>
     <div class="video-overlay">
-      <h1 class="video-title">Découvrez notre collection</h1>
+ 
       <button class="collection-button">Voir collection</button>
     </div>
   </div>
