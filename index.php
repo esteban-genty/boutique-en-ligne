@@ -17,6 +17,34 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-----------Style Police------------------->
 
+<?php
+
+try {
+    $pdo = new PDO(
+        'mysql:host=127.0.0.1;dbname=omni;charset=utf8mb4',
+        'root',  
+        '',   
+        [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]
+    );
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+
+
+$sql = "
+    SELECT id, name, price, image_url
+      FROM product
+     WHERE stock_quantity > 0
+  ORDER BY RAND()
+     LIMIT 4
+";
+$stmt = $pdo->query($sql);
+$randomProducts = $stmt->fetchAll();
+?>
+
 
 </head>
 <body>
@@ -86,10 +114,51 @@
   </div>
 </section>
 
+<!--  Nos Tendances -->
+<section class="tendances-section">
+  <h2>Nos Tendances</h2>
+  <div class="tendances-grid">
+    <article class="tendance-card">
+      <img src="public/assets/img/tendances-femmes.jpg" alt="Tendance Femme">
+      <div class="card-label">Femme</div>
+    </article>
+    <article class="tendance-card">
+      <img src="public/assets/img/tendances-homme.jpg" alt="Tendance Homme">
+      <div class="card-label">Homme</div>
+    </article>
+    <article class="tendance-card">
+      <img src="public/assets/img/tendances-unisexe.jpg" alt="Tendance Unisexe">
+      <div class="card-label">Unisexe</div>
+    </article>
+  </div>
+  <div class="collection-cta">
+    <button class="btn-collection">Voir la collection</button>
+  </div>
+</section>
+<!-- Nos Tendances -->
 
 
-
-
+<section class="products-section">
+  <h2>Nos Produits</h2>
+  <div class="products-grid">
+    <?php foreach ($randomProducts as $prod): ?>
+      <div class="product-card">
+        <img
+          src="public/assets/img/<?= htmlspecialchars($prod['image_url']) ?>"
+          alt="<?= htmlspecialchars($prod['name']) ?>"
+        >
+        <div class="product-overlay">
+          <span class="product-name">
+            <?= htmlspecialchars($prod['name']) ?>
+          </span>
+          <span class="product-price">
+            €<?= number_format($prod['price'], 2, ',', ' ') ?>
+          </span>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+</section>
 
 
 
