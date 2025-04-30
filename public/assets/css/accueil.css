@@ -17,20 +17,29 @@
   margin: 5px 0;
   background-color: #fff;
   transition: transform 0.3s ease, opacity 0.3s ease;
-}
-.promo-links {
+ }
+.promo-links{
   display: flex;
-  gap: 5.5rem;
+  gap: 4.5rem;
   list-style: none;
   padding: 1rem;
   margin: 0;
   justify-content: center;
   align-items: center;
+  background-color: #1c4cb7;
 }
 .promo-links li a {
-  color: #131212;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 500;
+}
+.promo-links :hover {
+  color: #000000;
+  transition: color 0.3s ease;
+}
+.promo-links li a.active {
+  color: #020202;
+  font-weight: bold;
 }
 
 
@@ -92,9 +101,10 @@
     flex-direction: column;
     position: absolute;
     top: 3rem; left: 0; right: 0;
-    background: #ffffff;
+    background: #000000c5;
     padding: 1rem;
     z-index: 15;
+
 
   }
   .promo-links.open { display: flex; }
