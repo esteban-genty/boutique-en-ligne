@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMNI</title>
+
+    <!-----------CSS------------------>
  <link rel="stylesheet" href="../boutique-en-ligne/public/assets/css/header.css">
  <link rel="stylesheet" href="../boutique-en-ligne/public/assets/css/footer.css">
+ <link rel="stylesheet" href="../boutique-en-ligne/public/assets/css/accueil.css">
+
+    <!-----------CSS------------------>
 
 
-
-
+<!-----------Style Police------------------->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-----------Style Police------------------->
 
 
-
+</head>
 <body>
-   
 <header>
   <div class="header-container">
     <div class="left-group">
@@ -23,13 +27,15 @@
       <button class="burger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="#">Homme</a></li>
-          <li><a href="#">Femme</a></li>
-        </ul>
-      </nav>
     </div>
+
+    <!-- NAVIGATION HOMME / FEMME -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#">Homme</a></li>
+        <li><a href="#">Femme</a></li>
+      </ul>
+    </nav>
 
     <div class="search-wrapper">
       <input type="text" placeholder="Rechercher" aria-label="Recherche"/>
@@ -41,6 +47,36 @@
     </div>
   </div>
 </header>
+
+<!----
+<section class="promo-banner">
+  <p>-20% sur les produits en promo !</p>
+</section>--->
+
+<section class="promo-section">
+  <nav class="promo-menu">
+    <ul>
+      <li>Promo</li>
+      <li>Nouveauté</li>
+      <li>Tendances</li>
+      <li>Vetements</li>
+      <li>Chaussures</li>
+      <li>Accessoires</li>
+    </ul>
+  </nav>
+
+  <div class="promo-image">
+    <img src="../boutique-en-ligne/public/assets/img/banniere.jpg" alt="Collection" />
+    <button class="collection-button">Voir collection</button>
+  </div>
+</section>
+
+
+
+
+
+
+
 
 <footer>
     <div class="footer-top">
@@ -93,6 +129,7 @@
       <p>&copy; 2025 Copyright Sébastien, Esteban, Lamine</p>
     </div>
   </footer>
-
+  <script src="../boutique-en-ligne/public/assets/js/burger-menu.js" defer></script>
+  
 </body>
 </html>
