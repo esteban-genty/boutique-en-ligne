@@ -1,5 +1,9 @@
 <?php
-require_once __DIR__ . '/../models/User.php';
+
+namespace App\Controllers;
+
+use App\Models\User;
+
 
 class AuthController
 {
@@ -19,7 +23,6 @@ class AuthController
       $user = $this->userModel->findByEmail($email);
 
       if ($user && password_verify($password, $user['password'])) {
-        session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_email'] = $user['email'];
@@ -31,9 +34,9 @@ class AuthController
 
         // Redirection
         if ($user['is_admin']) {
-          header('Location: /boutique-en-ligne/test.php');
+          header('Location: /boutique-en-ligne/admin');
         } else {
-          header('Location: /boutique-en-ligne/test.php');
+          header('Location: /boutique-en-ligne/profile');
         }
         exit;
       } else {
@@ -57,7 +60,7 @@ class AuthController
       // Vérification simple
       if ($password !== $confirmPassword) {
         $error = "Passwords do not match.";
-        require '../app/views/auth/register.php';
+        require_once __DIR__ . '/../views/auth/register.php';
         return;
       }
 
@@ -74,7 +77,7 @@ class AuthController
       header('Location: /boutique-en-ligne/login');
       exit;
     } else {
-      require '../app/views/auth/register.php';
+      require_once __DIR__ . '/../views/auth/register.php';
     }
   }
 
@@ -82,9 +85,8 @@ class AuthController
 
   public function logout()
   {
-    session_start();
     session_destroy();
-    header('Location: /login');
+    header('/boutique-en-ligne/login');
     exit;
   }
 }
