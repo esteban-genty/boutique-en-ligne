@@ -8,7 +8,12 @@ class User
 
   public function __construct()
   {
-    $this->db = new \PDO('mysql:host=127.0.0.1;port=3306;dbname=omni;charset=utf8', 'root', 'root');
+    try {
+      $this->db = new \PDO('mysql:host=localhost;dbname=omni', 'root', 'root');
+      $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    } catch (\PDOException $e) {
+      die('Erreur de connexion à la base de données : ' . $e->getMessage());
+    }
   }
 
   public function findByEmail($email)
@@ -28,5 +33,36 @@ class User
       $data['password'],
       $data['is_admin']
     ]);
+  }
+
+  public function updateUser($userId, $data)
+  {
+    $updates = [];
+    $params = [':id' => $userId];
+
+    if (isset($data['first_name'])) {
+      $updates[] = 'first_name = :first_name';
+      $params[':first_name'] = $data['first_name'];
+    }
+    if (isset($data['name'])) {
+      $updates[] = 'name = :name';
+      $params[':name'] = $data['name'];
+    }
+    if (isset($data['email'])) {
+      $updates[] = 'email = :email';
+      $params[':email'] = $data['email'];
+    }
+    if (isset($data['password'])) {
+      $updates[] = 'password = :password';
+      $params[':password'] = $data['password'];
+    }
+
+    if ($updates) {
+      $sql = 'UPDATE account SET ' . implode(', ', $updates) . ' WHERE id = :id';
+      $stmt = $this->db->prepare($sql);
+      return $stmt->execute($params);
+    }
+
+    return false;
   }
 }
