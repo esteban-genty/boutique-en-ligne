@@ -33,6 +33,10 @@ switch ($uri) {
     $controller = new App\Controllers\ProfileController();
     $controller->show();
     break;
+  case '/boutique-en-ligne/profile/update':
+    $controller = new App\Controllers\ProfileController();
+    $controller->update();
+    break;
   default:
     echo "404 Not Found";
     break;
