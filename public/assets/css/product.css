@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+:root {
+  --accent-color: #4f8a8b;
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-primary: #2d3142;
+  --text-secondary: #4f5d75;
+  --text-light: #9ba4b4;
+  --border-radius: 0;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+  --border: 1px solid #eee;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.products-container {
+  max-width: 1400px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.filters-container {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  margin-bottom: 3rem;
+  border: var(--border);
+}
+
+.filters-container h2 {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  font-weight: 500;
+  position: relative;
+}
+
+.filters-container h2:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent-color);
+}
+
+.filters-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.filter-select {
+  appearance: none;
+  padding: 1rem;
+  border: var(--border);
+  font-size: 0.95rem;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  width: 100%;
+  border-radius: var(--border-radius);
+  
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.reset-filters {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  border-radius: 5px;
+}
+
+.reset-filters:hover {
+  background-color: #3a6f70;
+}
+
+.product-card-vertical {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 3rem;
+  position: relative;
+  border: var(--border);
+  background-color: var(--card-bg);
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-vertical:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+}
+
+.product-card-vertical.reverse {
+  direction: rtl;
+}
+
+.product-card-vertical.reverse .product-info {
+  direction: ltr;
+}
+
+.product-image {
+  height: 100%;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition);
+}
+
+
+
+.product-info {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.product-info::before {
+  content: attr(data-category);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product-card-vertical.reverse .product-info::before {
+  left: auto;
+  right: 0;
+}
+
+.product-name {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.product-details {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.product-details span {
+  position: relative;
+}
+
+.product-details span:not(:last-child):after {
+  content: '';
+  position: absolute;
+  right: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--text-light);
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.like-button:before {
+  content: '♡';
+  font-size: 1.75rem;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+.like-button:hover:before {
+  content: '♥';
+  color: var(--accent-color);
+}
+.like-button:focus {
+  outline: 2px solid var(--accent-color);
+}
+.like-button.liked:before {
+  content: '♥';
+  color: var(--accent-color);
+}
+
+.product-separator {
+  border: none;
+  height: 1px;
+  background-color: #eee;
+  margin: 0;
+  opacity: 0;
+}
+
+.no-products,
+.no-filters-results {
+  padding: 5rem 2rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  border: var(--border);
+  background-color: var(--card-bg);
+  margin: 2rem 0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card-vertical:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.product-card-vertical:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.product-card-vertical:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.product-card-vertical:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .product-card-vertical {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card-vertical.reverse {
+    direction: ltr;
+  }
+
+  .product-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .product-info {
+    padding: 2rem;
+  }
+
+  .filters-options {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .products-container {
+    padding: 0 1rem;
+    margin: 2rem auto;
+  }
+
+  .filters-container,
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-name {
+    font-size: 1.35rem;
+  }
+
+  .product-details {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .product-details span:not(:last-child):after {
+    display: none;
+  }
+}

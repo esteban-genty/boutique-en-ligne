@@ -1,219 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNI</title>
-
-    <!-----------CSS------------------>
- <link rel="stylesheet" href="../boutique-en-ligne/public/assets/css/header.css">
- <link rel="stylesheet" href="../boutique-en-ligne/public/assets/css/footer.css">
- <link rel="stylesheet" href="../boutique-en-ligne/public/assets/css/accueil.css">
-
-    <!-----------CSS------------------>
-
-
-<!-----------Style Police------------------->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-----------Style Police------------------->
-
 <?php
+session_start();
 
-try {
-    $pdo = new PDO(
-        'mysql:host=127.0.0.1;dbname=omni;charset=utf8mb4',
-        'root',  
-        '',   
-        [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]
-    );
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
+require_once __DIR__ . '/app/core/autoLoader.php';
+
+Autoloader::register();
+
+// Get the requested controller and action from GET parameters if available
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
+$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+
+// Get the requested URI
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// For debugging - remove in production
+// echo "Current URI: " . $uri . "<br>";
+
+// Route par GET parameters (nouvelle façon de gérer les routes)
+if (isset($_GET['controller'])) {
+    $controllerName = ucfirst($_GET['controller']) . 'Controller';
+    $controllerClass = "App\\Controllers\\{$controllerName}";
+    
+    if (class_exists($controllerClass)) {
+        $controllerInstance = new $controllerClass();
+        if (method_exists($controllerInstance, $action)) {
+            $controllerInstance->$action();
+            exit;
+        }
+    }
 }
 
-
-$sql = "
-    SELECT id, name, price, image_url
-      FROM product
-     WHERE stock_quantity > 0
-  ORDER BY RAND()
-     LIMIT 4
-";
-$stmt = $pdo->query($sql);
-$randomProducts = $stmt->fetchAll();
-?>
-
-
-</head>
-<body>
-<header>
-  <div class="header-container">
-    <div class="left-group">
-      <div class="logo">OMNI</div>
-      <button class="burger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-    <!-- HOMME / FEMME -->
-    <nav class="main-nav">
-      <ul>
-        <li><a href="#">Homme</a></li>
-        <li><a href="#">Femme</a></li>
-      </ul>
-    </nav>
- <!-- HOMME / FEMME -->
-    <div class="search-wrapper">
-      <input type="text" placeholder="Rechercher" aria-label="Recherche"/>
-    </div>
-
-    <div class="icons">
-      <a href="#" aria-label="Panier"><i class="fa-solid fa-cart-shopping"></i></a>
-      <a href="#" aria-label="Mon compte"><i class="fa-solid fa-user"></i></a>
-    </div>
-  </div>
-</header>
-<section class="promo-section">
-  <nav class="promo-menu" role="navigation" aria-label="Promo menu">
-    <!-- Bouton hamburger -->
-    <button id="promoBurger" class="promo-burger"
-            aria-controls="promoLinks" aria-expanded="false"
-            aria-label="Ouvrir le menu promo">
-      <span class="burger-bar" aria-hidden="true"></span>
-      <span class="burger-bar" aria-hidden="true"></span>
-      <span class="burger-bar" aria-hidden="true"></span>
-    </button>
-      <!-- Bouton hamburger -->
-
-    <ul id="promoLinks" class="promo-links">
-      <li><a href="#">Promo</a></li>
-      <li><a href="#">Vêtements</a></li>
-      <li><a href="#">Tendances</a></li>
-      <li><a href="#">Chaussures</a></li>
-      <li><a href="#">Accessoires</a></li>
-      <li><a href="#">Nouveauté</a></li>
-    </ul>
-  </nav>
-
-  <div class="promo-video">
-    <video
-      class="banner-video"
-      poster="public/assets/img/banner.png"
-      autoplay muted loop playsinline preload="metadata"
-      aria-label="Vidéo de présentation de la collection"
-    >
-      <source src="public/assets/img/www.omni.com.mp4" type="video/mp4">
-
-    </video>
-    <div class="video-overlay">
- 
-      <button class="collection-button">Voir collection</button>
-    </div>
-  </div>
-</section>
-
-<!--  Nos Tendances -->
-<section class="tendances-section">
-  <h2>Nos Tendances</h2>
-  <div class="tendances-grid">
-    <article class="tendance-card">
-      <img src="public/assets/img/tendances-femmes.jpg" alt="Tendance Femme">
-      <div class="card-label">Femme</div>
-    </article>
-    <article class="tendance-card">
-      <img src="public/assets/img/tendances-homme.jpg" alt="Tendance Homme">
-      <div class="card-label">Homme</div>
-    </article>
-    <article class="tendance-card">
-      <img src="public/assets/img/tendances-unisexe.jpg" alt="Tendance Unisexe">
-      <div class="card-label">Unisexe</div>
-    </article>
-  </div>
-  <div class="collection-cta">
-    <button class="btn-collection">Voir la collection</button>
-  </div>
-</section>
-<!-- Nos Tendances -->
-
-
-<section class="products-section">
-  <h2>Nos Produits</h2>
-  <div class="products-grid">
-    <?php foreach ($randomProducts as $prod): ?>
-      <div class="product-card">
-        <img
-          src="public/assets/img/<?= htmlspecialchars($prod['image_url']) ?>"
-          alt="<?= htmlspecialchars($prod['name']) ?>"
-        >
-        <div class="product-overlay">
-          <span class="product-name">
-            <?= htmlspecialchars($prod['name']) ?>
-          </span>
-          <span class="product-price">
-            €<?= number_format($prod['price'], 2, ',', ' ') ?>
-          </span>
-        </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
-</section>
-
-
-
-<footer>
-    <div class="footer-top">
-      <div class="footer-logo">
-        <h2>nom du site |</h2>
-      </div>
-      <div class="footer-links">
-        <h3>Informations Légales</h3>
-        <ul>
-          <li><a href="#">Charte de Confidentialités</a></li>
-          <li><a href="#">Mention Légales</a></li>
-          <li><a href="#">Conditions générales de ventes</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h3>Informations Légales</h3>
-        <ul>
-          <li><a href="#">Charte de Confidentialités</a></li>
-          <li><a href="#">Mention Légales</a></li>
-          <li><a href="#">Conditions générales de ventes</a></li>
-        </ul>
-      </div>
-      <div class="footer-brand">
-        <h3>La marque</h3>
-        <ul>
-          <li><a href="#">Nom de marque</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-contact-social">
-      <div class="footer-contact">
-        <h3>Contactez-nous</h3>
-        <form>
-          <label for="email">Mon email :</label>
-          <input type="email" id="email" placeholder="Votre email">
-          <label for="message">Mon message :</label>
-          <input type="text" id="message" placeholder="Votre message">
-          <button type="submit" class="send-button"><i class="fas fa-arrow-right"></i></button>
-        </form>
-      </div>
-      <div class="footer-social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-pinterest"></i></a>
-        <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Copyright Sébastien, Esteban, Lamine</p>
-    </div>
-  </footer>
-  <script src="../boutique-en-ligne/public/assets/js/burger-menu.js" defer></script>
-  
-</body>
-</html>
+// Route par URI (ancienne façon - gardée pour rétrocompatibilité)
+switch ($uri) {
+  case '/boutique-en-ligne/':
+  case '/boutique-en-ligne':
+    // Change default route to go to home instead of login
+    $controller = new App\Controllers\HomeController();
+    $controller->index();
+    break;
+  case '/boutique-en-ligne/home':
+    $controller = new App\Controllers\HomeController();
+    $controller->index();
+    break;
+  case '/boutique-en-ligne/login':
+    $controller = new App\Controllers\AuthController();
+    $controller->login();
+    break;
+  case '/boutique-en-ligne/logout':
+    $controller = new App\Controllers\AuthController();
+    $controller->logout();
+    break;
+  case '/boutique-en-ligne/register':
+    $controller = new App\Controllers\AuthController();
+    $controller->register();
+    break;
+  case '/boutique-en-ligne/profile':
+    $controller = new App\Controllers\ProfileController();
+    $controller->show();
+    break;
+  case '/boutique-en-ligne/profile/update':
+    $controller = new App\Controllers\ProfileController();
+    $controller->update();
+    break;
+  default:
+    header("HTTP/1.0 404 Not Found");
+    echo "404 Not Found: The page you requested does not exist.";
+    break;
+}
