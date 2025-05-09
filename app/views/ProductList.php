@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle ?? '', ENT_QUOTES, 'UTF-8') ?> - OMNI</title>
+    <title>- OMNI</title>
     
     <!-- CSS -->
     <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/header.css">
@@ -106,9 +106,7 @@
     <button class="reset-filters" id="reset-filters">Réinitialiser les filtres</button>
 </div>
 
-                <!-- Filtres -->
-
-          <?php foreach ($products as $i => $product): ?>
+         <?php foreach ($products as $i => $product): ?>
     <?php
     $name    = $product['name'] ?? '';
     $garment = $product['garment'] ?? '';
