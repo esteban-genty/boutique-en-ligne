@@ -94,8 +94,9 @@
 
     </video>
     <div class="video-overlay">
- 
+ <a href="/boutique-en-ligne/index.php?controller=product&action=index" class="btn <?= (!isset($_GET['gender']) || ($_GET['gender'] !== 'man' && $_GET['gender'] !== 'woman')) ? 'active' : '' ?>">
       <button class="collection-button">Voir collection</button>
+      </a>
     </div>
   </div>
 </section>
@@ -118,7 +119,9 @@
     </a>
   </div>
   <div class="collection-cta">
+    <a href="/boutique-en-ligne/index.php?controller=product&action=index" class="btn <?= (!isset($_GET['gender']) || ($_GET['gender'] !== 'man' && $_GET['gender'] !== 'woman')) ? 'active' : '' ?>">
     <button class="btn-collection">Voir la collection</button>
+    </a>
   </div>
 </section>
 <!-- Nos Tendances -->

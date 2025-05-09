@@ -108,7 +108,7 @@
 
                 <!-- Filtres -->
 
-                <?php foreach ($products as $i => $product): ?>
+          <?php foreach ($products as $i => $product): ?>
     <?php
     $name    = $product['name'] ?? '';
     $garment = $product['garment'] ?? '';
@@ -117,12 +117,14 @@
     $price   = $product['price'] ?? 0;
     $img     = $product['image_url'] ?? '';
     $reverse = $i % 2 === 1 ? 'reverse' : '';
+    $productId = $product['id'] ?? 0;
     ?>
-    <div class="product-card-vertical <?= $reverse ?>" 
-         data-garment="<?= htmlspecialchars($garment) ?>" 
-         data-color="<?= htmlspecialchars($color) ?>" 
-         data-size="<?= htmlspecialchars($size) ?>">
-         
+    <div class="product-card-vertical <?= $reverse ?>"
+         data-garment="<?= htmlspecialchars($garment) ?>"
+         data-color="<?= htmlspecialchars($color) ?>"
+         data-size="<?= htmlspecialchars($size) ?>"
+         data-product-id="<?= intval($productId) ?>">
+        
         <div class="product-image">
             <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($name) ?>">
         </div>
@@ -136,11 +138,10 @@
             </div>
             <div class="product-meta">
                 <span class="product-price">€<?= number_format($price, 2, ',', ' ') ?></span>
-                <button class="like-button" aria-label="Ajouter aux favoris"></button>
-
-
-
-
+                <div class="product-actions">
+                    <button class="cart-button" aria-label="Ajouter au panier"></button>
+                    <button class="like-button" aria-label="Ajouter aux favoris"></button>
+                </div>
             </div>
         </div>
     </div>
