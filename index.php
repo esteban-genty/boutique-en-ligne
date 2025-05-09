@@ -5,17 +5,13 @@ require_once __DIR__ . '/app/core/autoLoader.php';
 
 Autoloader::register();
 
-// Get the requested controller and action from GET parameters if available
+
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-// Get the requested URI
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// For debugging - remove in production
-// echo "Current URI: " . $uri . "<br>";
-
-// Route par GET parameters (nouvelle façon de gérer les routes)
 if (isset($_GET['controller'])) {
     $controllerName = ucfirst($_GET['controller']) . 'Controller';
     $controllerClass = "App\\Controllers\\{$controllerName}";
@@ -29,11 +25,10 @@ if (isset($_GET['controller'])) {
     }
 }
 
-// Route par URI (ancienne façon - gardée pour rétrocompatibilité)
 switch ($uri) {
   case '/boutique-en-ligne/':
   case '/boutique-en-ligne':
-    // Change default route to go to home instead of login
+
     $controller = new App\Controllers\HomeController();
     $controller->index();
     break;
