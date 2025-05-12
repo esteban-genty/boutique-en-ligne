@@ -106,16 +106,16 @@
     <button class="reset-filters" id="reset-filters">Réinitialiser les filtres</button>
 </div>
 
-         <?php foreach ($products as $i => $product): ?>
+ <?php foreach ($products as $i => $product): ?>
     <?php
-    $name    = $product['name'] ?? '';
-    $garment = $product['garment'] ?? '';
-    $color   = $product['color'] ?? '';
-    $size    = $product['size'] ?? '';
-    $price   = $product['price'] ?? 0;
-    $img     = $product['image_url'] ?? '';
-    $reverse = $i % 2 === 1 ? 'reverse' : '';
-    $productId = $product['id'] ?? 0;
+    $name        = $product['name'] ?? '';
+    $garment     = $product['garment'] ?? '';
+    $color       = $product['color'] ?? '';
+    $size        = $product['size'] ?? '';
+    $price       = $product['price'] ?? 0;
+    $img         = $product['image_url'] ?? '';
+    $reverse     = $i % 2 === 1 ? 'reverse' : '';
+    $productId   = $product['id'] ?? 0;
     ?>
     <div class="product-card-vertical <?= $reverse ?>"
          data-garment="<?= htmlspecialchars($garment) ?>"
@@ -125,11 +125,19 @@
         
         <div class="product-image">
             <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($name) ?>">
+            <a href="index.php?page=details&id=<?= intval($productId) ?>" class="view-details-button" aria-label="Voir les détails">
+                Voir les détails
+            </a>
         </div>
         
         <div class="product-info">
             <div>
-                <h3 class="product-name"><?= htmlspecialchars($name) ?></h3>
+                <h3 class="product-name">
+                   <a href="index.php?controller=product&action=details&id=<?= intval($productId) ?>">
+
+                        <?= htmlspecialchars($name) ?>
+                    </a>
+                </h3>
                 <p class="product-details">
                     <?= ucfirst($color) ?> | <?= strtoupper($size) ?> | <?= ucfirst($garment) ?>
                 </p>
@@ -143,8 +151,16 @@
             </div>
         </div>
     </div>
-    <hr class="product-separator">
+
+    <?php if ($i % 2 === 1): ?>
+        <hr class="product-separator">
+    <?php endif; ?>
 <?php endforeach; ?>
+
+
+
+    <hr class="product-separator">
+
 
 
     </main>

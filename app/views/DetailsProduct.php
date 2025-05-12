@@ -18,11 +18,8 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-----------Style Police------------------->
 
-
-
-
 </head>
-<body>
+
 <header>
   <div class="header-container">
     <div class="left-group">
@@ -55,95 +52,58 @@
   </div>
 </header>
 
-
-<section class="promo-section">
-  <nav class="promo-menu" role="navigation" aria-label="Promo menu">
-    <!-- Bouton hamburger -->
-    <button id="promoBurger" class="promo-burger"
-            aria-controls="promoLinks" aria-expanded="false"
-            aria-label="Ouvrir le menu promo">
-      <span class="burger-bar" aria-hidden="true"></span>
-      <span class="burger-bar" aria-hidden="true"></span>
-      <span class="burger-bar" aria-hidden="true"></span>
-    </button>
-      <!-- Bouton hamburger -->
-
-    <ul id="promoLinks" class="promo-links">
-      <li><a href="#">Promo</a></li>
-      <li><a href="#">Vêtements</a></li>
-      <li><a href="#">Tendances</a></li>
-      <li><a href="#">Chaussures</a></li>
-      <li><a href="#">Accessoires</a></li>
-      <li><a href="#">Nouveauté</a></li>
-    </ul>
-  </nav>
-
-  <div class="promo-video">
-    <video
-      class="banner-video"
-      poster="./public/assets/img/banner.png"
-      autoplay muted loop playsinline preload="metadata"
-      aria-label="Vidéo de présentation de la collection"
-    >
-      <source src="/boutique-en-ligne/public/assets/img/www.omni.com.mp4" type="video/mp4">
-
-    </video>
-    <div class="video-overlay">
- <a href="/boutique-en-ligne/index.php?controller=product&action=index" class="btn <?= (!isset($_GET['gender']) || ($_GET['gender'] !== 'man' && $_GET['gender'] !== 'woman')) ? 'active' : '' ?>">
-      <button class="collection-button">Voir collection</button>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!--  Nos Tendances -->
-<section class="tendances-section">
-  <h2>Nos Tendances</h2>
-  <div class="tendances-grid">
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="tendance-card">
-      <img src="/boutique-en-ligne/public/assets/img/tendances-femmes.jpg" alt="Tendance Femme">
-      <div class="card-label">Femme</div>
-    </a>
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index&category=homme" class="tendance-card">
-      <img src="/boutique-en-ligne/public/assets/img/tendances-homme.jpg" alt="Tendance Homme">
-      <div class="card-label">Homme</div>
-    </a>
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe" class="tendance-card">
-      <img src="/boutique-en-ligne/public/assets/img/tendances-unisexe.jpg" alt="Tendance Unisexe">
-      <div class="card-label">Unisexe</div>
-    </a>
-  </div>
-  <div class="collection-cta">
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index" class="btn <?= (!isset($_GET['gender']) || ($_GET['gender'] !== 'man' && $_GET['gender'] !== 'woman')) ? 'active' : '' ?>">
-    <button class="btn-collection">Voir la collection</button>
-    </a>
-  </div>
-</section>
-<!-- Nos Tendances -->
-
-
-
-<section class="products-section">
-  <h2>Nos Produits</h2>
-  <div class="products-grid">
-    <?php foreach ($randomProducts as $prod): ?>
-      <div class="product-card">
-        <img
-          src="<?= htmlspecialchars($prod['image_url']) ?>"
-          alt="<?= htmlspecialchars($prod['name']) ?>"
-        >
-        <div class="product-overlay">
-          <span class="product-name">
-            <?= htmlspecialchars($prod['name']) ?>
-          </span>
-          <span class="product-price">
-            €<?= number_format($prod['price'], 2, ',', ' ') ?>
-          </span>
+<!-- Détails du produit -->
+<div class="container mt-5">
+    <div class="row">
+   
+            <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="img-fluid rounded shadow">
         </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
-</section>
+        <div class="col-md-6">
+                    <h2><?= htmlspecialchars($product['name'] ?? 'Nom du produit indisponible') ?></h2>
+            <p class="text-muted"><?= htmlspecialchars($product['garment'] ?? 'Type de vêtement indisponible') ?> - <?= htmlspecialchars($product['gender'] ?? 'Genre indisponible') ?></p>
+            <p><?= nl2br(htmlspecialchars($product['description'] ?? 'Aucune description disponible')) ?></p>
+            <p><strong>Couleur :</strong> <?= htmlspecialchars($product['color'] ?? 'Couleur indisponible') ?></p>
+            <p><strong>Taille :</strong> <?= htmlspecialchars($product['size'] ?? 'Taille indisponible') ?></p>
+            <p><strong>Prix :</strong> <?= number_format($product['price'], 2, ',', ' ') ?> €</p>
+            <p><strong>En stock :</strong> <?= intval($product['stock_quantity']) ?></p>
+
+            <form action="panier.php" method="POST">
+                <input type="hidden" name="product_id" value="<?= intval($product['id']) ?>">
+                <button type="submit" class="btn btn-primary mt-3">Acheter</button>
+            </form>
+        </div>
+    </div>
+<!-- Détails du produit -->
+ 
+    <!-- Suggestions -->
+    <?php if ($suggestions): ?>
+        <div class="mt-5">
+            <h3>Suggestions</h3>
+            <div class="row">
+                <?php foreach ($suggestions as $suggestion): ?>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img src="<?= htmlspecialchars($suggestion['image_url']) ?>" class="card-img-top" alt="<?= htmlspecialchars($suggestion['name']) ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= htmlspecialchars($suggestion['name']) ?></h5>
+                                <p class="card-text"><?= number_format($suggestion['price'], 2, ',', ' ') ?> €</p>
+                          <a href="index.php?controller=product&action=details&id=<?= $suggestion['id'] ?>" class="btn btn-primary">Voir le produit</a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="alert alert-info mt-5" role="alert">
+            Aucune suggestion pour ce produit.
+        </div>
+    <?php endif; ?>
+</div>
+
+
 
 
 
@@ -199,6 +159,3 @@
     </div>
   </footer>
   <script src="/boutique-en-ligne/public/assets/js/burger-menu.js" defer></script>
-  
-</body>
-</html>
