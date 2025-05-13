@@ -205,19 +205,16 @@ sexBtnMobile.addEventListener('click', () => {
   </section>
     <!-- NOS PRODUITS -->
 
-<footer class="bg-blue-900 text-white w-full">
- 
+<footer class="bg-gray-900 text-white w-full">
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
     
-  
     <div class="flex flex-col items-start space-y-8 w-full">
-   
       <div class="flex items-center w-full">
-        <span class="text-3xl font-bold">nom du site</span>
-        <span class="h-8 border-r-2 border-white ml-6"></span>
+        <span class="text-3xl font-bold text-blue-400">OMNI</span>
+        <span class="h-8 border-r-2 border-blue-400 ml-6"></span>
       </div>
 
-      <h4 class="text-xl font-semibold w-full">Contactez-nous</h4>
+      <h4 class="text-xl font-semibold w-full text-gray-300">Contactez-nous</h4>
 
       <div class="flex items-center space-x-4 w-full">
         <input
@@ -235,7 +232,6 @@ sexBtnMobile.addEventListener('click', () => {
         </button>
       </div>
 
-
       <input
         type="text"
         placeholder="Mon message"
@@ -244,38 +240,34 @@ sexBtnMobile.addEventListener('click', () => {
       />
     </div>
     
-   
     <div class="flex flex-col space-y-6 w-full">
-      <h4 class="text-xl font-semibold">Informations Légales</h4>
+      <h4 class="text-xl font-semibold text-gray-300">Informations Légales</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-green-400 transition">Charte de Confidentialité</a></li>
-        <li><a href="#" class="text-base hover:text-green-400 transition">Mentions Légales</a></li>
-        <li><a href="#" class="text-base hover:text-green-400 transition">Conditions générales de ventes</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
       </ul>
     </div>
 
-  
     <div class="flex flex-col space-y-6 w-full">
-      <h4 class="text-xl font-semibold">Informations Légales</h4>
+      <h4 class="text-xl font-semibold text-gray-300">Informations Légales</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-green-400 transition">Charte de Confidentialité</a></li>
-        <li><a href="#" class="text-base hover:text-green-400 transition">Mentions Légales</a></li>
-        <li><a href="#" class="text-base hover:text-green-400 transition">Conditions générales de ventes</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
       </ul>
     </div>
 
-  
     <div class="flex flex-col space-y-6 w-full">
-      <h4 class="text-xl font-semibold">La marque</h4>
+      <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-green-400 transition">Nom de marque</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
       </ul>
     </div>
   </div>
 
-
-  <div class="bg-blue-800 text-center py-6 w-full">
-    <p class="text-base">&copy; 2025 Sébastien, Esteban, Lamine</p>
+  <div class="bg-gray-900 text-center py-6 w-full">
+    <p class="text-base text-gray-300">&copy; 2025 Sébastien, Esteban, Lamine</p>
   </div>
 </footer>
 
