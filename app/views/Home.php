@@ -19,7 +19,8 @@
 <body class="antialiased text-gray-100">
 
 
- <header class="relative h-screen overflow-hidden">
+<header class="relative h-[75vh] overflow-hidden">
+
 
   <video
     class="absolute top-0 left-0 w-full h-full object-cover"
@@ -43,9 +44,8 @@
 
     <ul class="hidden md:flex space-x-8 text-white items-center">
       <li><a href="#" class="hover:opacity-80">Collection</a></li>
-      <li><a href="#" class="hover:opacity-80">Accessoires</a></li>
-      <li><a href="#" class="hover:opacity-80"></a></li>
-      <li><a href="#" class="hover:opacity-80">Patterns</a></li>
+
+    
 
      
       <li class="relative">
@@ -67,7 +67,7 @@
       </li>
 
       <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
-      <li><a href="#" class="hover:opacity-80">Mon panier</a></li>
+      <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
     </ul>
 
     <!-- Burger mobile -->
@@ -81,10 +81,10 @@
   <!-- Menu mobile  -->
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Blocks</a></li>
-      <li><a href="#">Patterns</a></li>
+      <li><a href="#">Collection</a></li>
+      <li><a href="#">Mon Panier</a></li>
+      <li><a href="#">Mon Compte</a></li>
+     
       <li>
         <!-- Mobile  Sexe -->
         <button
@@ -99,8 +99,7 @@
           <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman">Femme</a></li>
         </ul>
       </li>
-      <li><a href="#">Shop</a></li>
-      <li><a href="#">Contact</a></li>
+   
     </ul>
   </div>
 </nav>
