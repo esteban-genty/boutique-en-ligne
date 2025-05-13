@@ -69,6 +69,18 @@ switch ($uri) {
         $controller = new App\Controllers\ProfileController();
         $controller->update();
         break;
+case '/boutique-en-ligne/cart/add':
+    $controller = new App\Controllers\CartController();
+    $controller->add();
+    break;
+case '/boutique-en-ligne/cart':
+    $controller = new App\Controllers\CartController();
+    $controller->show();
+    break;
+case '/boutique-en-ligne/cart/clear':
+    $controller = new App\Controllers\CartController();
+    $controller->clear();
+    break;
 
     default:
         http_response_code(404);
