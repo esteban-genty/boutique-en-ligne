@@ -22,15 +22,12 @@
 <header class="relative h-[75vh] overflow-hidden">
 
 
-<img
-  class="absolute top-0 left-0 w-full h-full object-cover"
-  src="./public/assets/img/Beach-Outfit-Ideas-for-Men.webp"
-  alt="Description de l'image"
->
+<video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
+  <source src="./public/assets/img/details.mp4" type="video/mp4">
 
-    <source src="./public/assets/img/www.omni.com.mp4" type="video/mp4">
-  </video>
+</video>
 
+    
  
   <div class="absolute inset-0 bg-black/50 z-10"></div>
 
@@ -152,47 +149,38 @@ sexBtnMobile.addEventListener('click', () => {
             <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
         </div>
 
-   
         <div class="product-info">
             <h1 class="product-title"><?= htmlspecialchars($product['name'] ?? 'Nom du produit indisponible') ?></h1>
 
-     
-
-  
+            <!-- Description produit -->
             <div class="product-description">
                 <p><?= nl2br(htmlspecialchars($product['description'] ?? 'Aucune description disponible')) ?></p>
             </div>
 
-            
-  <div class="product-options">
-    <div class="option-label">
-        <span>Couleur :</span>
-        <div class="color-options">
-            <?php
-                $colorClass = 'color-' . strtolower(trim($product['color']));
-            ?>
-            <div class="color-option <?= $colorClass ?> selected" title="<?= htmlspecialchars($product['color']) ?>"></div>
-        </div>
-    </div>
-</div>
+            <!-- Options de produit -->
+            <div class="product-options">
+                <div class="option-label">
+                    <span>Couleur :</span>
+                    <div class="color-options">
+                        <?php
+                            $colorClass = 'color-' . strtolower(trim($product['color']));
+                        ?>
+                        <div class="color-option <?= $colorClass ?> selected" title="<?= htmlspecialchars($product['color']) ?>"></div>
+                    </div>
+                </div>
+            </div>
 
-
-<!-- Taille -->
-<div class="product-options">
-    <div class="option-label">
-        <span>Taille :</span>
-        <div class="size-options">
-           
-            <?php if (!empty($product['size'])): ?>
-                <button class="size-option selected"><?= strtoupper($product['size']) ?></button>
-            <?php endif; ?>
-        </div>
-    </div>
-</div>
-
-
-
-
+            <!-- Taille -->
+            <div class="product-options">
+                <div class="option-label">
+                    <span>Taille :</span>
+                    <div class="size-options">
+                        <?php if (!empty($product['size'])): ?>
+                            <button class="size-option selected"><?= strtoupper($product['size']) ?></button>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
 
             <!-- Quantité et bouton -->
             <div class="quantity-controls">
@@ -217,9 +205,17 @@ sexBtnMobile.addEventListener('click', () => {
                     <span class="shipping-text">Retour gratuit pour les commandes illisibles.</span>
                 </div>
             </div>
+
+            <!-- Quantité en stock -->
+            <div class="stock-info">
+                <?php
+                    // Vérifie si 'stock_quantity' existe et est non null, sinon affiche "Non disponible"
+                    $stockQuantity = isset($product['stock_quantity']) ? $product['stock_quantity'] : 'Non disponible';
+                ?>
+                <p><strong>En stock :</strong> <?= htmlspecialchars($stockQuantity) ?> </p>
+            </div>
         </div>
     </div>
-
 
     <?php if (!empty($suggestions)): ?>
         <div class="suggestions-section">
@@ -244,8 +240,7 @@ sexBtnMobile.addEventListener('click', () => {
 
 
 
-
-<footer class="bg-blue-900 text-white w-full">
+<footer class="bg-dark-900 text-white w-full">
  
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
     
