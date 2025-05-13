@@ -63,9 +63,9 @@
         </ul>
       </li>
 
-<li><a href="?controller=cart&action=index" class="hover:opacity-80">Mon Panier</a></li>
+<li><a href="." class="hover:opacity-80">Mon Compte</a></li>
 
-   <a href="/boutique-en-ligne/cart">Panier</a>
+   <a href="/boutique-en-ligne/cart">Mon Panier</a>
 
     </ul>
 
@@ -81,7 +81,7 @@
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
       <li><a href="">Collection</a></li>
- <li><a href="?controller=cart&action=index" class="hover:opacity-80">Mon Panier</a></li>
+ <a href="/boutique-en-ligne/cart">Mon Panier</a>
 
       <li><a href="#">Mon Compte</a></li>
      

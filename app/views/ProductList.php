@@ -60,7 +60,7 @@
             <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="block px-4 py-2 hover:bg-gray-200">Femme</a></li>
           </ul>
         </li>
-        <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
+<li> <a href="/boutique-en-ligne/cart">Mon Panier</a></li>
         <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
       </ul>
 
@@ -78,7 +78,7 @@
     <ul class="flex flex-col p-6 space-y-4">
       <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe">Collection</a></li>
       <li><a href="#">Mon Panier</a></li>
-      <li><a href="#">Mon Compte</a></li>
+<li> <a href="/boutique-en-ligne/cart">Mon Panier</li>
       <li>
         <button id="sexBtnMobile" class="w-full text-left flex items-center justify-between" aria-expanded="false">
           Sexe <i class="fas fa-chevron-down"></i>

@@ -61,8 +61,10 @@ class CartController
 }
 public function clear()
 {
-    unset($_SESSION['cart']);
+    unset($_SESSION['cart']); // Efface le panier
+    header('Location: /boutique-en-ligne/cart'); // Redirige vers la page panier
     exit;
 }
+
 
 }
