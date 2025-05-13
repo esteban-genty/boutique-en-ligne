@@ -5,6 +5,9 @@ require_once __DIR__ . '/app/core/autoLoader.php';
 
 Autoloader::register();
 
+use App\Controllers\AdminProductController;
+
+
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -41,6 +44,25 @@ switch ($uri) {
     $controller = new App\Controllers\ProfileController();
     $controller->update();
     break;
+  case '/admin/products':
+    (new AdminProductController())->index();
+    break;
+  case '/admin/products/create':
+    (new AdminProductController())->create();
+    break;
+  case '/admin/products/store':
+    (new AdminProductController())->store();
+    break;
+  case (preg_match('#^/admin/products/edit/(\d+)$#', $uri, $matches) ? true : false):
+    (new AdminProductController())->edit($matches[1]);
+    break;
+  case (preg_match('#^/admin/products/update/(\d+)$#', $uri, $matches) ? true : false):
+    (new AdminProductController())->update($matches[1]);
+    break;
+  case (preg_match('#^/admin/products/delete/(\d+)$#', $uri, $matches) ? true : false):
+    (new AdminProductController())->delete($matches[1]);
+    break;
+
   default:
     echo "404 Not Found";
     break;
