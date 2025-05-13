@@ -4,42 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>- OMNI</title>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/header.css">
-    <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/footer.css">
+   <!-- TailwindCSS  -->
+  <script src="https://cdn.tailwindcss.com"></script>   
+ 
+  
     <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/product.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="left-group">
-                <div class="logo">OMNI</div>
-                <button class="burger" aria-label="Menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-            <nav class="main-nav">
-                <ul class="flex space-x-4">
-                    <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=man" class="btn <?= (isset($_GET['gender']) && $_GET['gender'] === 'man') ? 'active' : '' ?>">Homme</a></li>
-                    <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="btn <?= (isset($_GET['gender']) && $_GET['gender'] === 'woman') ? 'active' : '' ?>">Femme</a></li>
-                    <li><a href="/boutique-en-ligne/index.php?controller=product&action=index" class="btn <?= (!isset($_GET['gender']) || ($_GET['gender'] !== 'man' && $_GET['gender'] !== 'woman')) ? 'active' : '' ?>">Tous</a></li>
-                </ul>
-            </nav>
-            <div class="search-wrapper">
-                <input type="text" placeholder="Rechercher" aria-label="Recherche"/>
-            </div>
-            <div class="icons">
-                <a href="#" aria-label="Panier"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="#" aria-label="Mon compte"><i class="fa-solid fa-user"></i></a>
-            </div>
-        </div>
-    </header>
-      <!-- Header -->
+
+<header class="relative h-[75vh] w-full overflow-hidden">
+
+  <?php
+  $category = isset($_GET['gender']) ? $_GET['gender'] : 'all';
+  $bannerMedia = '';
+
+  if ($category === 'man') {
+      $bannerMedia = './public/assets/img/home.mp4';/* banniere  vrai homme*/
+  } elseif ($category === 'woman') {
+      $bannerMedia = './public/assets/img/femme.mp4'; /* banniere femme*/
+  } else {
+      $bannerMedia = './public/assets/img/www.omni.com (1).mp4'; /* banniere   defaut*/
+  }
+  ?>
+
+  <?php if (pathinfo($bannerMedia, PATHINFO_EXTENSION) === 'mp4'): ?>
+    <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
+  <source src="<?= $bannerMedia ?>" type="video/mp4">
+</video>
+
+  <?php else: ?>
+    <img class="absolute top-0 left-0 w-full h-full object-cover" src="<?= $bannerMedia ?>" alt="Bannière">
+  <?php endif; ?>
+
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+ 
+  <nav class="absolute inset-x-0 top-0 z-20">
+    <div class="max-w-7xl mx-auto flex items-center justify-between p-6">
+      <div class="text-2xl font-bold text-white">
+        <a href="/boutique-en-ligne" class="no-underline text-white hover:opacity-80">OMNI</a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-8 text-white items-center">
+        <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe" class="hover:opacity-80">Collection</a></li>
+        <li class="relative">
+          <button id="sexBtn" class="hover:opacity-80 flex items-center" aria-haspopup="true" aria-expanded="false">
+            Sexe <i class="fas fa-chevron-down ml-2"></i>
+          </button>
+          <ul id="sexMenu" class="absolute top-full mt-2 left-0 w-40 text-white-800 bg-white text-black rounded shadow-lg opacity-0 pointer-events-none transition-opacity">
+            <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=man" class="block px-4 py-2 hover:bg-gray-200">Homme</a></li>
+            <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="block px-4 py-2 hover:bg-gray-200">Femme</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
+        <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
+      </ul>
+
+      <!-- Burger Button -->
+      <div class="flex items-center md:hidden">
+        <button id="burgerBtn" class="text-white focus:outline-none">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden md:hidden bg-black/90 text-white absolute top-0 left-0 w-full z-30">
+    <ul class="flex flex-col p-6 space-y-4">
+      <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe">Collection</a></li>
+      <li><a href="#">Mon Panier</a></li>
+      <li><a href="#">Mon Compte</a></li>
+      <li>
+        <button id="sexBtnMobile" class="w-full text-left flex items-center justify-between" aria-expanded="false">
+          Sexe <i class="fas fa-chevron-down"></i>
+        </button>
+        <ul id="sexMenuMobile" class="mt-2 ml-4 space-y-2 hidden">
+          <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=man">Homme</a></li>
+          <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman">Femme</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</header>
+
+
+<script>
+  // Desktop 
+  const sexBtn = document.getElementById('sexBtn');
+  const sexMenu = document.getElementById('sexMenu');
+
+  sexBtn.addEventListener('click', () => {
+    const expanded = sexBtn.getAttribute('aria-expanded') === 'true';
+    sexBtn.setAttribute('aria-expanded', String(!expanded));
+    sexMenu.classList.toggle('opacity-100');
+    sexMenu.classList.toggle('pointer-events-auto');
+  });
+
+  // Mobile 
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  burgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Mobile Sexe
+  const sexBtnMobile = document.getElementById('sexBtnMobile');
+  const sexMenuMobile = document.getElementById('sexMenuMobile');
+
+  sexBtnMobile.addEventListener('click', () => {
+    const expanded = sexBtnMobile.getAttribute('aria-expanded') === 'true';
+    sexBtnMobile.setAttribute('aria-expanded', String(!expanded));
+    sexMenuMobile.classList.toggle('hidden');
+  });
+</script>
+
+
+
+
+
+
+    <!-- Menu mobile -->
+    <div id="mobileMenu" class="hidden md:hidden bg-black/80">
+      <ul class="flex flex-col p-6 space-y-4 text-white">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blocks</a></li>
+        <li><a href="#">Patterns</a></li>
+        <li><a href="#">Templates</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Contact</a></li>
+        <li>
+        
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+</header>
+
     <main class="products-container">
 
         
@@ -106,16 +215,16 @@
     <button class="reset-filters" id="reset-filters">Réinitialiser les filtres</button>
 </div>
 
-         <?php foreach ($products as $i => $product): ?>
+ <?php foreach ($products as $i => $product): ?>
     <?php
-    $name    = $product['name'] ?? '';
-    $garment = $product['garment'] ?? '';
-    $color   = $product['color'] ?? '';
-    $size    = $product['size'] ?? '';
-    $price   = $product['price'] ?? 0;
-    $img     = $product['image_url'] ?? '';
-    $reverse = $i % 2 === 1 ? 'reverse' : '';
-    $productId = $product['id'] ?? 0;
+    $name        = $product['name'] ?? '';
+    $garment     = $product['garment'] ?? '';
+    $color       = $product['color'] ?? '';
+    $size        = $product['size'] ?? '';
+    $price       = $product['price'] ?? 0;
+    $img         = $product['image_url'] ?? '';
+    $reverse     = $i % 2 === 1 ? 'reverse' : '';
+    $productId   = $product['id'] ?? 0;
     ?>
     <div class="product-card-vertical <?= $reverse ?>"
          data-garment="<?= htmlspecialchars($garment) ?>"
@@ -125,11 +234,19 @@
         
         <div class="product-image">
             <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($name) ?>">
+            <a href="index.php?page=details&id=<?= intval($productId) ?>" class="view-details-button" aria-label="Voir les détails">
+            
+            </a>
         </div>
         
         <div class="product-info">
             <div>
-                <h3 class="product-name"><?= htmlspecialchars($name) ?></h3>
+                <h3 class="product-name">
+                   <a href="index.php?controller=product&action=details&id=<?= intval($productId) ?>">
+
+                        <?= htmlspecialchars($name) ?>
+                    </a>
+                </h3>
                 <p class="product-details">
                     <?= ucfirst($color) ?> | <?= strtoupper($size) ?> | <?= ucfirst($garment) ?>
                 </p>
@@ -143,8 +260,16 @@
             </div>
         </div>
     </div>
-    <hr class="product-separator">
+
+    <?php if ($i % 2 === 1): ?>
+        <hr class="product-separator">
+    <?php endif; ?>
 <?php endforeach; ?>
+
+
+
+    <hr class="product-separator">
+
 
 
     </main>
@@ -213,56 +338,84 @@
     });
 </script>
 
-    <footer>
-    <div class="footer-top">
-      <div class="footer-logo">
-        <h2>nom du site |</h2>
+
+<footer class="bg-gray-900 text-white w-full">
+  <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
+    
+    <div class="flex flex-col items-start space-y-8 w-full">
+      <div class="flex items-center w-full">
+        <span class="text-3xl font-bold text-blue-400">OMNI</span>
+        <span class="h-8 border-r-2 border-blue-400 ml-6"></span>
       </div>
-      <div class="footer-links">
-        <h3>Informations Légales</h3>
-        <ul>
-          <li><a href="#">Charte de Confidentialités</a></li>
-          <li><a href="#">Mention Légales</a></li>
-          <li><a href="#">Conditions générales de ventes</a></li>
-        </ul>
+
+      <h4 class="text-xl font-semibold w-full text-gray-300">Contactez-nous</h4>
+
+      <div class="flex items-center space-x-4 w-full">
+        <input
+          type="email"
+          placeholder="Mon email"
+          required
+          class="flex-1 bg-transparent border-2 border-white rounded-full px-6 py-3 placeholder-gray-300 focus:outline-none text-white w-full"
+        />
+        <button
+          type="submit"
+          aria-label="Envoyer"
+          class="w-12 h-12 flex items-center justify-center border-2 border-white rounded-full hover:bg-white/20 transition flex-shrink-0"
+        >
+          <i class="fas fa-arrow-right text-white"></i>
+        </button>
       </div>
-      <div class="footer-links">
-        <h3>Informations Légales</h3>
-        <ul>
-          <li><a href="#">Charte de Confidentialités</a></li>
-          <li><a href="#">Mention Légales</a></li>
-          <li><a href="#">Conditions générales de ventes</a></li>
-        </ul>
-      </div>
-      <div class="footer-brand">
-        <h3>La marque</h3>
-        <ul>
-          <li><a href="#">Nom de marque</a></li>
-        </ul>
-      </div>
+
+      <input
+        type="text"
+        placeholder="Mon message"
+        required
+        class="w-full bg-transparent border-2 border-white rounded-full px-6 py-3 placeholder-gray-300 focus:outline-none text-white"
+      />
     </div>
-    <div class="footer-contact-social">
-      <div class="footer-contact">
-        <h3>Contactez-nous</h3>
-        <form>
-          <label for="email">Mon email :</label>
-          <input type="email" id="email" placeholder="Votre email">
-          <label for="message">Mon message :</label>
-          <input type="text" id="message" placeholder="Votre message">
-          <button type="submit" class="send-button"><i class="fas fa-arrow-right"></i></button>
-        </form>
-      </div>
-      <div class="footer-social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-pinterest"></i></a>
-        <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
-      </div>
+    
+    <div class="flex flex-col space-y-6 w-full">
+      <h4 class="text-xl font-semibold text-gray-300">Informations Légales</h4>
+      <ul class="space-y-3">
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
+      </ul>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Copyright Sébastien, Esteban, Lamine</p>
+
+    <div class="flex flex-col space-y-6 w-full">
+      <h4 class="text-xl font-semibold text-gray-300">Informations Légales</h4>
+      <ul class="space-y-3">
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
+      </ul>
     </div>
-  </footer>
+
+    <div class="flex flex-col space-y-6 w-full">
+      <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
+      <ul class="space-y-3">
+        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bg-gray-900 text-center py-6 w-full">
+    <p class="text-base text-gray-300">&copy; 2025 Sébastien, Esteban, Lamine</p>
+  </div>
+</footer>
+
+  <!-- Burger Menu JS -->
+  <script>
+    const burgerBtn  = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
+
+
+
+
