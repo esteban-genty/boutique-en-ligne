@@ -11,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
     <!-----------CSS------------------>
-
+    <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/details.css">
 
 <!-----------Style Police------------------->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,14 +22,12 @@
 <header class="relative h-[75vh] overflow-hidden">
 
 
-  <video
-    class="absolute top-0 left-0 w-full h-full object-cover"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-  >
+<img
+  class="absolute top-0 left-0 w-full h-full object-cover"
+  src="./public/assets/img/Beach-Outfit-Ideas-for-Men.webp"
+  alt="Description de l'image"
+>
+
     <source src="./public/assets/img/www.omni.com.mp4" type="video/mp4">
   </video>
 
@@ -46,7 +44,7 @@
 
 
     <ul class="hidden md:flex space-x-8 text-white items-center">
-      <li><a href="#" class="hover:opacity-80">Collection</a></li>
+      <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe" class="hover:opacity-80">Collection</a></li>
     
 
      
@@ -83,7 +81,7 @@
   <!-- Menu mobile  -->
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
-   <li><a href="#">Collection</a></li>
+   <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe">Collection</a></li>
       <li><a href="#">Mon Panier</a></li>
       <li><a href="#">Mon Compte</a></li>
       <li>
@@ -147,46 +145,91 @@ sexBtnMobile.addEventListener('click', () => {
 
 </header>
 
-<!-- Détails du produit -->
-<div class="container mt-5">
-    <div class="row">
-   
-            <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="img-fluid rounded shadow">
+<div class="container">
+    <div class="product-container">
+      
+        <div class="product-image">
+            <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
         </div>
-        <div class="col-md-6">
-                    <h2><?= htmlspecialchars($product['name'] ?? 'Nom du produit indisponible') ?></h2>
-            <p class="text-muted"><?= htmlspecialchars($product['garment'] ?? 'Type de vêtement indisponible') ?> - <?= htmlspecialchars($product['gender'] ?? 'Genre indisponible') ?></p>
-            <p><?= nl2br(htmlspecialchars($product['description'] ?? 'Aucune description disponible')) ?></p>
-            <p><strong>Couleur :</strong> <?= htmlspecialchars($product['color'] ?? 'Couleur indisponible') ?></p>
-            <p><strong>Taille :</strong> <?= htmlspecialchars($product['size'] ?? 'Taille indisponible') ?></p>
-            <p><strong>Prix :</strong> <?= number_format($product['price'], 2, ',', ' ') ?> €</p>
-            <p><strong>En stock :</strong> <?= intval($product['stock_quantity']) ?></p>
 
-            <form action="panier.php" method="POST">
-                <input type="hidden" name="product_id" value="<?= intval($product['id']) ?>">
-                <button type="submit" class="btn btn-primary mt-3">Acheter</button>
-            </form>
+   
+        <div class="product-info">
+            <h1 class="product-title"><?= htmlspecialchars($product['name'] ?? 'Nom du produit indisponible') ?></h1>
+
+     
+
+  
+            <div class="product-description">
+                <p><?= nl2br(htmlspecialchars($product['description'] ?? 'Aucune description disponible')) ?></p>
+            </div>
+
+            
+  <div class="product-options">
+    <div class="option-label">
+        <span>Couleur :</span>
+        <div class="color-options">
+            <?php
+                $colorClass = 'color-' . strtolower(trim($product['color']));
+            ?>
+            <div class="color-option <?= $colorClass ?> selected" title="<?= htmlspecialchars($product['color']) ?>"></div>
         </div>
     </div>
-<!-- Détails du produit -->
- 
-    <!-- Suggestions -->
-    <?php if ($suggestions): ?>
-        <div class="mt-5">
-            <h3>Suggestions</h3>
-            <div class="row">
+</div>
+
+
+<!-- Taille -->
+<div class="product-options">
+    <div class="option-label">
+        <span>Taille :</span>
+        <div class="size-options">
+           
+            <?php if (!empty($product['size'])): ?>
+                <button class="size-option selected"><?= strtoupper($product['size']) ?></button>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+            <!-- Quantité et bouton -->
+            <div class="quantity-controls">
+                <button class="quantity-btn minus">-</button>
+                <input type="text" name="quantity" class="quantity-input" value="1">
+                <button class="quantity-btn plus">+</button>
+                <form action="panier.php" method="POST" class="d-inline">
+                    <input type="hidden" name="product_id" value="<?= intval($product['id']) ?>">
+                    <button type="submit" class="buy-button">Acheter</button>
+                </form>
+                <button class="wishlist-button"><i class="far fa-heart"></i></button>
+            </div>
+
+            <!-- Infos livraison -->
+            <div class="shipping-info">
+                <div class="shipping-option">
+                    <i class="fas fa-truck"></i>
+                    <span class="shipping-text">Livraison gratuite. D'autres options sont disponibles.</span>
+                </div>
+                <div class="shipping-option">
+                    <i class="fas fa-undo"></i>
+                    <span class="shipping-text">Retour gratuit pour les commandes illisibles.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <?php if (!empty($suggestions)): ?>
+        <div class="suggestions-section">
+            <h2 class="section-title">Suggestions :</h2>
+            <div class="suggestions-grid">
                 <?php foreach ($suggestions as $suggestion): ?>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="<?= htmlspecialchars($suggestion['image_url']) ?>" class="card-img-top" alt="<?= htmlspecialchars($suggestion['name']) ?>">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= htmlspecialchars($suggestion['name']) ?></h5>
-                                <p class="card-text"><?= number_format($suggestion['price'], 2, ',', ' ') ?> €</p>
-                          <a href="index.php?controller=product&action=details&id=<?= $suggestion['id'] ?>" class="btn btn-primary">Voir le produit</a>
-
-
-                            </div>
-                        </div>
+                    <div class="suggestion-card">
+                        <a href="index.php?controller=product&action=details&id=<?= $suggestion['id'] ?>">
+                            <img src="<?= htmlspecialchars($suggestion['image_url']) ?>" alt="<?= htmlspecialchars($suggestion['name']) ?>">
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -197,6 +240,7 @@ sexBtnMobile.addEventListener('click', () => {
         </div>
     <?php endif; ?>
 </div>
+
 
 
 

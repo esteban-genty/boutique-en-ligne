@@ -6,6 +6,7 @@
   <title>OMNI – The Future</title>
   <!-- TailwindCSS  -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!----------CSS ----->
     <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/accueil.css">
 
   <link 
@@ -21,17 +22,13 @@
 
 <header class="relative h-[75vh] overflow-hidden">
 
+<video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
+  <source src="./public/assets/img/accueil2.mp4" type="video/mp4">
 
-  <video
-    class="absolute top-0 left-0 w-full h-full object-cover"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-  >
-    <source src="./public/assets/img/www.omni.com.mp4" type="video/mp4">
-  </video>
+</video>
+
+
+
 
  
   <div class="absolute inset-0 bg-black/50 z-10"></div>
@@ -43,7 +40,7 @@
     <div class="text-2xl font-bold text-white">OMNI</div>
 
     <ul class="hidden md:flex space-x-8 text-white items-center">
-      <li><a href="#" class="hover:opacity-80">Collection</a></li>
+      <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=all" class="hover:opacity-80">Collection</a></li>
 
     
 
@@ -81,7 +78,7 @@
   <!-- Menu mobile  -->
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
-      <li><a href="#">Collection</a></li>
+      <li><a href="">Collection</a></li>
       <li><a href="#">Mon Panier</a></li>
       <li><a href="#">Mon Compte</a></li>
      
@@ -145,31 +142,43 @@ sexBtnMobile.addEventListener('click', () => {
 
 
 </header>
-
-<!--  Nos Tendances -->
+<!------------- Categories----------------->
 <section class="tendances-section">
-  <h2>Nos Tendances</h2>
-  <div class="tendances-grid">
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="tendance-card">
-      <img src="/boutique-en-ligne/public/assets/img/tendances-femmes.jpg" alt="Tendance Femme">
-      <div class="card-label">Femme</div>
-    </a>
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index&category=homme" class="tendance-card">
-      <img src="/boutique-en-ligne/public/assets/img/tendances-homme.jpg" alt="Tendance Homme">
-      <div class="card-label">Homme</div>
-    </a>
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe" class="tendance-card">
-      <img src="/boutique-en-ligne/public/assets/img/tendances-unisexe.jpg" alt="Tendance Unisexe">
-      <div class="card-label">Unisexe</div>
-    </a>
-  </div>
-  <div class="collection-cta">
-    <a href="/boutique-en-ligne/index.php?controller=product&action=index" class="btn <?= (!isset($_GET['gender']) || ($_GET['gender'] !== 'man' && $_GET['gender'] !== 'woman')) ? 'active' : '' ?>">
-    <button class="btn-collection">Voir la collection</button>
-    </a>
+  <div class="tendances-decor-line"></div>
+  <div class="tendances-decor-dots"></div>
+  <div class="tendances-inner">
+    <h2>Tendances</h2>
+    <p class="tendances-description">Découvrez nos dernières collections et les tendances du moment.</p>
+    
+    <div class="tendances-grid">
+      <a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="tendance-card">
+        <img src="./public/assets/img/tendances-femmes.jpg" alt="Tendance Femme">
+        <div class="card-label">
+          <span class="card-label-category">Catégorie</span>
+          <h3 class="card-label-title">Femme</h3>
+        </div>
+      </a>
+
+      <a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=man" class="tendance-card">
+        <img src="./public/assets/img/tendances-homme.jpg" alt="Tendance Homme">
+        <div class="card-label">
+          <span class="card-label-category">Catégorie</span>
+          <h3 class="card-label-title">Homme</h3>
+        </div>
+      </a>
+
+ 
+    </div>
+
+    <div class="collection-cta">
+      <a href="/boutique-en-ligne/index.php?controller=product&action=index">
+        <button class="btn-collection">Voir la collection</button>
+      </a>
+    </div>
   </div>
 </section>
-<!-- Nos Tendances -->
+
+<!------------- Categories----------------->
 
   <!-- NOS PRODUITS -->
   <section id="get-started" class="py-16 bg-gray-50">
@@ -194,6 +203,7 @@ sexBtnMobile.addEventListener('click', () => {
       </div>
     </div>
   </section>
+    <!-- NOS PRODUITS -->
 
 <footer class="bg-blue-900 text-white w-full">
  
