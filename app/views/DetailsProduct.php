@@ -63,7 +63,8 @@
         </ul>
       </li>
 
-      <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
+<li><a href="?controller=cart&action=index" class="hover:opacity-80">Mon Panier</a></li>
+
       <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
     </ul>
 
@@ -79,7 +80,8 @@
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
    <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe">Collection</a></li>
-      <li><a href="#">Mon Panier</a></li>
+<li><a href="?controller=cart&action=index" class="hover:opacity-80">Mon Panier</a></li>
+
       <li><a href="#">Mon Compte</a></li>
       <li>
         <!-- Mobile  Sexe -->
@@ -296,7 +298,7 @@ sexBtnMobile.addEventListener('click', () => {
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">OMNI</a></li>
       </ul>
     </div>
   </div>

@@ -254,7 +254,8 @@
             <div class="product-meta">
                 <span class="product-price">€<?= number_format($price, 2, ',', ' ') ?></span>
                 <div class="product-actions">
-                    <button class="cart-button" aria-label="Ajouter au panier"></button>
+                    <button class="cart-button" aria-label="Ajouter au panier" data-id="<?= $product['id'] ?>"></button>
+
                     <button class="like-button" aria-label="Ajouter aux favoris"></button>
                 </div>
             </div>
@@ -265,6 +266,35 @@
         <hr class="product-separator">
     <?php endif; ?>
 <?php endforeach; ?>
+<!----------AJOUT AU Panier -------------->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.cart-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.dataset.id;
+
+            fetch('/boutique-en-ligne/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Produit ajouté au panier !");
+                } else {
+                    alert("Erreur : " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur :', error);
+            });
+        });
+    });
+});
+</script>
 
 
 
@@ -395,7 +425,7 @@
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">OMNI</a></li>
       </ul>
     </div>
   </div>
