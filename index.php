@@ -13,6 +13,10 @@ switch ($uri) {
   case '/boutique-en-ligne':
     header('Location: /boutique-en-ligne/login');
     exit;
+  case '/boutique-en-ligne/admin/dashboard':
+    $controller = new \App\Controllers\AdminController();
+    $controller->dashboard();
+    break;
   case '/boutique-en-ligne/home':
     $controller = new App\Controllers\HomeController();
     $controller->index();
