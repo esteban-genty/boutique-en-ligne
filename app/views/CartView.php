@@ -148,57 +148,81 @@ sexBtnMobile.addEventListener('click', () => {
 
 </header>
 
-<!-- Code HTML pour remplacer uniquement la section panier -->
+
 
 <!----------------------- PANIER------------>
 
 <div class="cart-container">
-    <h1>Votre Panier</h1>
+                  <h1>Votre Panier</h1>
 
-    <?php if (empty($products)): ?>
-        <div class="cart-empty">
-            <p>Votre panier est vide.</p>
-        </div>
-    <?php else: ?>
-        <!-- En-tête du panier -->
-        <div class="cart-header">
-            <div class="product-col">Produits</div>
-            <div class="price-col">Prix</div>
-            <div class="quantity-col">Quantité</div>
-            <div class="subtotal-col">Sous-total</div>
-        </div>
+                            <?php if (empty($products)): ?>
+                                <div class="cart-empty">
+                                    <p>Votre panier est vide.</p>
+                                </div>
+                            <?php else: ?>
+                                            <!-- En-tête du panier -->
+                                            <div class="cart-header">
+                                                <div class="product-col">Produits</div>
+                                                <div class="price-col">Prix</div>
+                                                <div class="quantity-col">Quantité</div>
+                                                <div class="subtotal-col">Sous-total</div>
+                                            </div>
 
-        <!-- Produits du panier -->
-        <?php foreach ($products as $product): ?>
-            <div class="cart-product">
-                <div class="product-image">
-                    <img src="<?= $product['image_url'] ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-                </div>
-                <div class="product-info">
-                    <?= htmlspecialchars($product['name']) ?>
-                </div>
-                <div class="product-price"><?= number_format($product['price'], 2) ?> €</div>
-                <div class="product-quantity">
-                    <div class="quantity-control">
-                       
-                        <div class="quantity-value"><?= $product['quantity'] ?></div>
-                  
-                    </div>
-                </div>
-                <div class="product-subtotal"><?= number_format($product['subtotal'], 2) ?> €</div>
-            </div>
-        <?php endforeach; ?>
+                                                        <!-- Produits du panier -->
+                                                        <?php foreach ($products as $product): ?>
+                                                            <div class="cart-product">
+                                                                <div class="product-image">
+                                                                    <img src="<?= $product['image_url'] ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                                                </div>
+                                                                <div class="product-info">
+                                                                    <?= htmlspecialchars($product['name']) ?>
+                                                                </div>
+                                                                <div class="product-price"><?= number_format($product['price'], 2) ?> €</div>
+                                                                <div class="product-quantity">
+                                                                    <div class="quantity-control">
+                                                                      
+                                                                        <div class="quantity-value"><?= $product['quantity'] ?></div>
+                                                                  
+                                                                    </div>
+                                                                </div>
+                                                                <div class="product-subtotal"><?= number_format($product['subtotal'], 2) ?> €</div>
+                                                            </div>
+                                                        <?php endforeach; ?>
 
-        <!-- Total -->
-        <div class="cart-total">Total : <?= number_format($total, 2) ?> €</div>
+                                            <!-- Total -->
+                                            <div class="cart-total">Total : <?= number_format($total, 2) ?> €</div>
 
-        <!-- Bouton vider le panier -->
-        <div class="cart-actions">
-            <form method="post" action="/boutique-en-ligne/cart/clear" onsubmit="return confirm('Voulez-vous vraiment vider votre panier ?');">
-                <button type="submit">Vider le panier</button>
-            </form>
-        </div>
+                          <!-- Bouton vider le panier -->
+                          <div class="cart-actions">
+                              <form method="post" action="/boutique-en-ligne/cart/clear" onsubmit="return confirm('Voulez-vous vraiment vider votre panier ?');">
+                                  <button type="submit">Vider le panier</button>
+                              </form>
+                          </div>
     <?php endif; ?>
+
+                                          <!-- paiement -->
+                                      <div class="cart-actions flex flex-col space-y-4 mt-6">
+                                        
+                                        
+
+                                          
+                                          <form method="post" action="/boutique-en-ligne/cart/checkout">
+                                        
+                                              <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+                                                  <i class="fas fa-credit-card mr-2"></i>Payer
+                                              </button>
+                                          </form>
+
+                                          <!-- Méthodes de paiement -->
+                                          <div class="flex items-center space-x-4 mt-4">
+                                              <span class="text-gray-700 font-medium">Nous acceptons :</span>
+                                              <i class="fab fa-cc-visa text-3xl text-blue-700"></i>
+                                              <i class="fab fa-cc-mastercard text-3xl text-red-600"></i>
+                                              <i class="fab fa-cc-amex text-3xl text-blue-500"></i>
+                                              <i class="fab fa-cc-paypal text-3xl text-yellow-500"></i>
+                                          </div>
+                                      </div>
+
 </div>
 
 
