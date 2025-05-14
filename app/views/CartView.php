@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/cart.css">
 
 <!-----------Style Police------------------->
+
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-----------Style Police------------------->
 
@@ -208,9 +209,10 @@ sexBtnMobile.addEventListener('click', () => {
                                           
                                           <form method="post" action="/boutique-en-ligne/cart/checkout">
                                         
-                                              <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-                                                  <i class="fas fa-credit-card mr-2"></i>Payer
-                                              </button>
+                                       <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+  <i class="fas fa-credit-card mr-2"></i>Payer
+</button>
+
                                           </form>
 
                                           <!-- Méthodes de paiement -->
