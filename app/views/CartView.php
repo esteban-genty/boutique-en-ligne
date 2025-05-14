@@ -1,11 +1,11 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMNI</title>
+<script src="https://js.stripe.com/v3/"></script>
 
 
   <!-- TailwindCSS  -->
@@ -209,9 +209,20 @@ sexBtnMobile.addEventListener('click', () => {
                                           
                                           <form method="post" action="/boutique-en-ligne/cart/checkout">
                                         
-                                       <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
-  <i class="fas fa-credit-card mr-2"></i>Payer
-</button>
+                                                  <form id="payment-form" action="/votre-script-de-paiement.php" method="POST">
+                                                    <div id="card-element">
+                                                    
+                                                    </div>
+
+                                                  <form id="payment-form">
+                                                      <div id="card-element">
+                                                          <!-- Le champ de carte de crédit sera inséré ici -->
+                                                      </div>
+                                                      <button id="submit">Payer</button>
+                                                      <div id="error-message"></div>
+                                                  </form>
+
+                                                  </form>
 
                                           </form>
 
@@ -226,6 +237,7 @@ sexBtnMobile.addEventListener('click', () => {
                                       </div>
 
 </div>
+
 
 
 <!----------------------- FIN PANIER------------>

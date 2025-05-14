@@ -82,6 +82,7 @@ case '/boutique-en-ligne/cart/clear':
     $controller->clear();
     break;
 
+
     default:
         http_response_code(404);
         echo "404 Not Found: The page you requested does not exist.";

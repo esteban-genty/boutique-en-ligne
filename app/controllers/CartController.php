@@ -62,6 +62,8 @@ foreach ($products as $key => $product) {
 
     require_once __DIR__ . '/../views/CartView.php';
 }
+
+
 public function clear()
 {
     unset($_SESSION['cart']); // Efface le panier
