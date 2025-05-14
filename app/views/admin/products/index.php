@@ -1,6 +1,6 @@
 <h2>Liste des produits</h2>
 
-<a href="/admin/products/create">➕ Ajouter un produit</a>
+<a href="/boutique-en-ligne/admin/products/create">➕ Ajouter un produit</a>
 
 <table border="1" cellpadding="10" cellspacing="0">
   <thead>
@@ -21,8 +21,8 @@
           <td><?= htmlspecialchars($product['price']) ?> €</td>
           <td><?= htmlspecialchars($product['stock_quantity']) ?></td>
           <td>
-            <a href="/admin/products/edit/<?= $product['id'] ?>">✏️ Modifier</a> |
-            <a href="/admin/products/delete/<?= $product['id'] ?>" onclick="return confirm('Supprimer ce produit ?');">🗑️ Supprimer</a>
+            <a href="/boutique-en-ligne/admin/products/edit/<?= $product['id'] ?>">✏️ Modifier</a> |
+            <a href="/boutique-en-ligne/admin/products/delete/<?= $product['id'] ?>" onclick="return confirm('Supprimer ce produit ?');">🗑️ Supprimer</a>
           </td>
         </tr>
       <?php endforeach; ?>

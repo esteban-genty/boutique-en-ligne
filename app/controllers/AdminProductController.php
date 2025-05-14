@@ -23,7 +23,7 @@ class AdminProductController
     // Récupérer et valider les données POST
     $productModel = new Product();
     $productModel->create($_POST);
-    header('Location: /admin/products');
+    header('Location: /boutique-en-ligne/admin/products');
   }
 
   public function edit($id)
@@ -37,13 +37,13 @@ class AdminProductController
   {
     $productModel = new Product();
     $productModel->update($id, $_POST);
-    header('Location: /admin/products');
+    header('Location: /boutique-en-ligne/admin/products');
   }
 
   public function delete($id)
   {
     $productModel = new Product();
     $productModel->delete($id);
-    header('Location: /admin/products');
+    header('Location: /boutique-en-ligne/admin/products');
   }
 }
