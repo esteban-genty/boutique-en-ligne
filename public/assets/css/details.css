@@ -28,11 +28,11 @@ body {
 
 .product-image {
     flex: 1;
-    min-width: 300px;
+    min-width: 200px;
 }
 
 .product-image img {
-    width: 100%;
+    width: 75%;
     height: auto;
     object-fit: cover;
     border-radius: 4px;

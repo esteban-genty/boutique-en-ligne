@@ -23,7 +23,7 @@
 
 
 <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
-  <source src="./public/assets/img/details.mp4" type="video/mp4">
+  <source src="./public/assets/img/accueil.mp4" type="video/mp4">
 
 </video>
 
@@ -63,7 +63,11 @@
         </ul>
       </li>
 
-      <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
+<li>
+ <a href="/boutique-en-ligne/cart">Mon Panier</a>
+</li>
+
+
       <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
     </ul>
 
@@ -79,7 +83,8 @@
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
    <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe">Collection</a></li>
-      <li><a href="#">Mon Panier</a></li>
+<li><a href="?controller=cart&action=index" class="hover:opacity-80">Mon Panier</a></li>
+
       <li><a href="#">Mon Compte</a></li>
       <li>
         <!-- Mobile  Sexe -->
@@ -152,68 +157,76 @@ sexBtnMobile.addEventListener('click', () => {
         <div class="product-info">
             <h1 class="product-title"><?= htmlspecialchars($product['name'] ?? 'Nom du produit indisponible') ?></h1>
 
-            <!-- Description produit -->
-            <div class="product-description">
-                <p><?= nl2br(htmlspecialchars($product['description'] ?? 'Aucune description disponible')) ?></p>
-            </div>
+                          <!-- Description produit -->
+                          <div class="product-description">
+                              <p><?= nl2br(htmlspecialchars($product['description'] ?? 'Aucune description disponible')) ?></p>
+                          </div>
 
-            <!-- Options de produit -->
-            <div class="product-options">
-                <div class="option-label">
-                    <span>Couleur :</span>
-                    <div class="color-options">
-                        <?php
-                            $colorClass = 'color-' . strtolower(trim($product['color']));
-                        ?>
-                        <div class="color-option <?= $colorClass ?> selected" title="<?= htmlspecialchars($product['color']) ?>"></div>
-                    </div>
-                </div>
-            </div>
+                                <!-- Options de produit -->
+                                <div class="product-options">
+                                    <div class="option-label">
+                                        <span>Couleur :</span>
+                                        <div class="color-options">
+                                            <?php
+                                                $colorClass = 'color-' . strtolower(trim($product['color']));
+                                            ?>
+                                            <div class="color-option <?= $colorClass ?> selected" title="<?= htmlspecialchars($product['color']) ?>"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-            <!-- Taille -->
-            <div class="product-options">
-                <div class="option-label">
-                    <span>Taille :</span>
-                    <div class="size-options">
-                        <?php if (!empty($product['size'])): ?>
-                            <button class="size-option selected"><?= strtoupper($product['size']) ?></button>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
+                                    <!-- Taille -->
+                                    <div class="product-options">
+                                        <div class="option-label">
+                                            <span>Taille :</span>
+                                            <div class="size-options">
+                                                <?php if (!empty($product['size'])): ?>
+                                                    <button class="size-option selected"><?= strtoupper($product['size']) ?></button>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            <!-- Quantité et bouton -->
-            <div class="quantity-controls">
-                <button class="quantity-btn minus">-</button>
-                <input type="text" name="quantity" class="quantity-input" value="1">
-                <button class="quantity-btn plus">+</button>
-                <form action="panier.php" method="POST" class="d-inline">
-                    <input type="hidden" name="product_id" value="<?= intval($product['id']) ?>">
-                    <button type="submit" class="buy-button">Acheter</button>
-                </form>
-                <button class="wishlist-button"><i class="far fa-heart"></i></button>
-            </div>
+                                              <!-- Quantité et bouton -->
+                                            <div class="quantity-controls">
+                                                <button class="quantity-btn minus">-</button>
+                                                <input type="text" name="quantity" class="quantity-input" value="1">
+                                                <button class="quantity-btn plus">+</button>
 
-            <!-- Infos livraison -->
-            <div class="shipping-info">
-                <div class="shipping-option">
-                    <i class="fas fa-truck"></i>
-                    <span class="shipping-text">Livraison gratuite. D'autres options sont disponibles.</span>
-                </div>
-                <div class="shipping-option">
-                    <i class="fas fa-undo"></i>
-                    <span class="shipping-text">Retour gratuit pour les commandes illisibles.</span>
-                </div>
-            </div>
+                                                <form action="/boutique-en-ligne/index.php?controller=cart&action=add" method="POST" class="flex items-center space-x-4">
+                                                    <input type="hidden" name="product_id" value="<?= intval($product['id']) ?>">
+                                                    <input type="hidden" name="quantity" value="1" class="hidden-quantity">
+                                                     <button 
+                                                        class="buy-button" 
+                                                        id="addToCartBtn" 
+                                                        data-product-id="<?= intval($product['id']) ?>">
+                                                        Acheter
+                                                       </button>
 
-            <!-- Quantité en stock -->
-            <div class="stock-info">
-                <?php
-                    // Vérifie si 'stock_quantity' existe et est non null, sinon affiche "Non disponible"
-                    $stockQuantity = isset($product['stock_quantity']) ? $product['stock_quantity'] : 'Non disponible';
-                ?>
-                <p><strong>En stock :</strong> <?= htmlspecialchars($stockQuantity) ?> </p>
-            </div>
+                                                    <button type="button" class="wishlist-button"><i class="far fa-heart"></i></button>
+                                                </form>
+                                            </div>
+
+                                  <!-- Infos livraison -->
+                                  <div class="shipping-info">
+                                      <div class="shipping-option">
+                                          <i class="fas fa-truck"></i>
+                                          <span class="shipping-text">Livraison gratuite. D'autres options sont disponibles.</span>
+                                      </div>
+                                      <div class="shipping-option">
+                                          <i class="fas fa-undo"></i>
+                                          <span class="shipping-text">Retour gratuit pour les commandes illisibles.</span>
+                                      </div>
+                                  </div>
+
+                            <!-- Quantité en stock -->
+                            <div class="stock-info">
+                                <?php
+                                    // Vérifie si 'stock_quantity' existe et est non null, sinon affiche "Non disponible"
+                                    $stockQuantity = isset($product['stock_quantity']) ? $product['stock_quantity'] : 'Non disponible';
+                                ?>
+                                <p><strong>En stock :</strong> <?= htmlspecialchars($stockQuantity) ?> </p>
+                            </div>
         </div>
     </div>
 
@@ -296,7 +309,7 @@ sexBtnMobile.addEventListener('click', () => {
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">OMNI</a></li>
       </ul>
     </div>
   </div>
@@ -314,5 +327,57 @@ sexBtnMobile.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
   </script>
+  <script>
+  const plusBtn = document.querySelector('.quantity-btn.plus');
+  const minusBtn = document.querySelector('.quantity-btn.minus');
+  const inputQty = document.querySelector('.quantity-input');
+  const hiddenQty = document.querySelector('.hidden-quantity');
+
+  plusBtn.addEventListener('click', () => {
+    inputQty.value = parseInt(inputQty.value || "1") + 1;
+    hiddenQty.value = inputQty.value;
+  });
+
+  minusBtn.addEventListener('click', () => {
+    if (parseInt(inputQty.value) > 1) {
+      inputQty.value = parseInt(inputQty.value) - 1;
+      hiddenQty.value = inputQty.value;
+    }
+  });
+
+  inputQty.addEventListener('input', () => {
+    hiddenQty.value = inputQty.value;
+  });
+</script>
+<script>
+document.getElementById('addToCartBtn').addEventListener('click', function () {
+    const productId = this.getAttribute('data-product-id');
+    const quantity = document.querySelector('.quantity-input').value;
+
+    fetch('/boutique-en-ligne/index.php?controller=cart&action=add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: productId, quantity: quantity })
+    })
+
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+           window.location.href = "/boutique-en-ligne/cart";
+
+        } else {
+            alert("Erreur : " + data.message);
+        }
+    })
+    .catch(error => {
+        alert("Une erreur s’est produite.");
+        console.error(error);
+    });
+});
+</script>
+
+
   </body>
 </html>
