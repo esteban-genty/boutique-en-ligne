@@ -23,7 +23,7 @@
 <header class="relative h-[75vh] overflow-hidden">
 
 <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
-  <source src="./public/assets/img/accueil2.mp4" type="video/mp4">
+  <source src="./public/assets/img/accueil.mp4" type="video/mp4">
 
 </video>
 

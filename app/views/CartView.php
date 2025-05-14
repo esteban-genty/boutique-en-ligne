@@ -12,7 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
     <!-----------CSS------------------>
-    <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/details.css">
+    <link rel="stylesheet" href="/boutique-en-ligne/public/assets/css/cart.css">
 
 <!-----------Style Police------------------->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -24,7 +24,7 @@
 
 
 <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
-  <source src="./public/assets/img/details.mp4" type="video/mp4">
+  <source src="./public/assets/img/accueil.mp4" type="video/mp4">
 
 </video>
 
@@ -148,41 +148,65 @@ sexBtnMobile.addEventListener('click', () => {
 
 </header>
 
-<h1>Votre Panier</h1>
+<!-- Code HTML pour remplacer uniquement la section panier -->
 
-<?php if (empty($products)): ?>
-    <p>Votre panier est vide.</p>
-<?php else: ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Produit</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Sous-total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($products as $product): ?>
-                <tr>
-                    <td>
-                        <img src="<?= $product['image_url'] ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="50">
-                        <?= htmlspecialchars($product['name']) ?>
-                    </td>
-                    <td><?= number_format($product['price'], 2) ?> €</td>
-                    <td><?= $product['quantity'] ?></td>
-                    <td><?= number_format($product['subtotal'], 2) ?> €</td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <h3>Total : <?= number_format($total, 2) ?> €</h3>
-<?php endif; ?>
+<!----------------------- PANIER------------>
 
-<form method="post" action="/boutique-en-ligne/cart/clear" onsubmit="return confirm('Voulez-vous vraiment vider votre panier ?');">
-    <button type="submit">Vider le panier</button>
-</form>
+<div class="cart-container">
+    <h1>Votre Panier</h1>
 
+    <?php if (empty($products)): ?>
+        <div class="cart-empty">
+            <p>Votre panier est vide.</p>
+        </div>
+    <?php else: ?>
+        <!-- En-tête du panier -->
+        <div class="cart-header">
+            <div class="product-col">Produits</div>
+            <div class="price-col">Prix</div>
+            <div class="quantity-col">Quantité</div>
+            <div class="subtotal-col">Sous-total</div>
+        </div>
+
+        <!-- Produits du panier -->
+        <?php foreach ($products as $product): ?>
+            <div class="cart-product">
+                <div class="product-image">
+                    <img src="<?= $product['image_url'] ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                </div>
+                <div class="product-info">
+                    <?= htmlspecialchars($product['name']) ?>
+                </div>
+                <div class="product-price"><?= number_format($product['price'], 2) ?> €</div>
+                <div class="product-quantity">
+                    <div class="quantity-control">
+                       
+                        <div class="quantity-value"><?= $product['quantity'] ?></div>
+                  
+                    </div>
+                </div>
+                <div class="product-subtotal"><?= number_format($product['subtotal'], 2) ?> €</div>
+            </div>
+        <?php endforeach; ?>
+
+        <!-- Total -->
+        <div class="cart-total">Total : <?= number_format($total, 2) ?> €</div>
+
+        <!-- Bouton vider le panier -->
+        <div class="cart-actions">
+            <form method="post" action="/boutique-en-ligne/cart/clear" onsubmit="return confirm('Voulez-vous vraiment vider votre panier ?');">
+                <button type="submit">Vider le panier</button>
+            </form>
+        </div>
+    <?php endif; ?>
+</div>
+
+
+<!----------------------- FIN PANIER------------>
+
+
+
+<!-- Footer -->
 <footer class="bg-gray-900 text-white w-full">
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
     
