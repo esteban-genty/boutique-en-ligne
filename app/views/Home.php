@@ -23,7 +23,7 @@
 <header class="relative h-[75vh] overflow-hidden">
 
 <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
-  <source src="./public/assets/img/accueil2.mp4" type="video/mp4">
+  <source src="./public/assets/img/accueil.mp4" type="video/mp4">
 
 </video>
 
@@ -63,8 +63,10 @@
         </ul>
       </li>
 
-      <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
-      <li><a href="/boutique-en-ligne/profile" class="hover:opacity-80">Mon Compte</a></li>
+<li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
+
+   <a href="/boutique-en-ligne/cart">Mon Panier</a>
+
     </ul>
 
     <!-- Burger mobile -->
@@ -79,7 +81,8 @@
   <div id="mobileMenu" class="hidden md:hidden bg-black/80">
     <ul class="flex flex-col p-6 space-y-4 text-white">
       <li><a href="">Collection</a></li>
-      <li><a href="#">Mon Panier</a></li>
+ <a href="/boutique-en-ligne/cart">Mon Panier</a>
+
       <li><a href="#">Mon Compte</a></li>
      
       <li>
@@ -261,7 +264,7 @@ sexBtnMobile.addEventListener('click', () => {
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">OMNI</a></li>
       </ul>
     </div>
   </div>
