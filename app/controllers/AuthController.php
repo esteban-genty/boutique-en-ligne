@@ -37,7 +37,7 @@ class AuthController
         if ($user['is_admin']) {
           header('Location: /boutique-en-ligne/admin');
         } else {
-          header('Location: /boutique-en-ligne/profile');
+          header('Location: /boutique-en-ligne/');
         }
         exit;
       } else {
