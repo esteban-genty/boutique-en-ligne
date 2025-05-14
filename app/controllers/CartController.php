@@ -3,30 +3,32 @@ namespace App\Controllers;
 
 class CartController
 {
-    public function add()
-    {
-        header('Content-Type: application/json');
+   public function add()
+{
+    header('Content-Type: application/json');
 
-        $data = json_decode(file_get_contents('php://input'), true);
-        $id = isset($data['id']) ? intval($data['id']) : null;
+    $data = json_decode(file_get_contents('php://input'), true);
+    $id = isset($data['id']) ? intval($data['id']) : null;
+    $quantity = isset($data['quantity']) ? intval($data['quantity']) : 1;
 
-        if (!$id) {
-            echo json_encode(['success' => false, 'message' => 'ID manquant.']);
-            return;
-        }
-
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
-
-        if (isset($_SESSION['cart'][$id])) {
-            $_SESSION['cart'][$id]++;
-        } else {
-            $_SESSION['cart'][$id] = 1;
-        }
-
-        echo json_encode(['success' => true]);
+    if (!$id) {
+        echo json_encode(['success' => false, 'message' => 'ID manquant.']);
+        return;
     }
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id] += $quantity; 
+    } else {
+        $_SESSION['cart'][$id] = $quantity; 
+    }
+
+    echo json_encode(['success' => true]);
+}
+
     public function show()
 {
     $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
@@ -46,11 +48,12 @@ class CartController
         $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         
-        foreach ($products as &$product) {
-            $product['quantity'] = $cart[$product['id']];
-   $product['subtotal'] = (float)$product['quantity'] * (float)$product['price'];
+foreach ($products as $key => $product) {
+    $quantity = $cart[$product['id']];
+    $products[$key]['quantity'] = $quantity;
+    $products[$key]['subtotal'] = $quantity * $product['price'];
+}
 
-        }
 
         $total = array_sum(array_column($products, 'subtotal'));
     }
