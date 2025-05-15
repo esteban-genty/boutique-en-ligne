@@ -51,6 +51,7 @@ switch ($uri) {
     break;
 
 
+
     default:
     echo "404 Not Found";
     break;

@@ -32,25 +32,33 @@ class ProductsController
     
 
 
-    public function addProductController()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'name' => trim($_POST['name']),
-                'description' => trim($_POST['description']),
-                'price' => trim($_POST['price']),
-                'gender_id' => trim($_POST['gender_id']),
-                'garment_id' => trim($_POST['garment_id']),
-                'color_id' => trim($_POST['color_id']),
-                'size_id' => trim($_POST['size_id']),
-                'stock_quantity' => trim($_POST['stock_quantity']),
-                'image_url' => trim($_POST['image_url']),
-            ];
+public function addProductController()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
+            'name' => trim($_POST['name']),
+            'description' => trim($_POST['description']),
+            'price' => trim($_POST['price']),
+            'gender_id' => trim($_POST['gender_id']),
+            'garment_id' => trim($_POST['garment_id']),
+            'color_id' => trim($_POST['color_id']),
+            'size_id' => trim($_POST['size_id']),
+            'stock_quantity' => trim($_POST['stock_quantity']),
+            'image_url' => trim($_POST['image_url']),
+        ];
 
-            var_dump($data);
-            die('Formulaire bien soumis');
+        $success = $this->productModel->addProduct($data);
+
+        if ($success) {
+            header('Location: /boutique-en-ligne/manage_products');
+            exit;
+        } else {
+            echo "Erreur lors de l'ajout du produit.";
         }
     }
+}
+
+
 
     private function render($view, $data = [])
     {

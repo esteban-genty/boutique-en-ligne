@@ -20,7 +20,7 @@ class ManageProducts{
     public function addProduct($data)
     {
         $stmt = $this->db->prepare("
-            INSERT INTO product (name, description, price, gender_id, garment_id, color_id, size_id, stock_quantity, image)
+            INSERT INTO product (name, description, price, gender_id, garment_id, color_id, size_id, image_url, stock_quantity)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
     
@@ -32,8 +32,8 @@ class ManageProducts{
             $data['garment_id'],
             $data['color_id'],
             $data['size_id'],
-            $data['stock_quantity'],
-            $data['image_url']
+            $data['image_url'],
+            $data['stock_quantity']
         ]);
     }
     
