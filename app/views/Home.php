@@ -45,27 +45,73 @@
     
 
      
-      <li class="relative">
-        <button
-          id="sexBtn"
-          class="hover:opacity-80 flex items-center"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Sexe <i class="fas fa-chevron-down ml-2"></i>
-        </button>
-        <ul
-          id="sexMenu"
-          class="absolute top-full mt-2 left-0 w-40  text-white-800 rounded shadow-lg opacity-0 pointer-events-none transition-opacity"
-        >
-          <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=man" class="block px-4 py-2 hover:bg-gray-500">Homme</a></li>
-          <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="block px-4 py-2 hover:bg-gray-500">Femme</a></li>
-        </ul>
-      </li>
+     <li class="relative group">
+  <button
+    id="sexBtn"
+    class="hover:opacity-80 flex items-center"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Sexe <i class="fas fa-chevron-down ml-2"></i>
+  </button>
+  <ul
+    id="sexMenu"
+    class="absolute top-full mt-2 left-0 w-40 bg-white/10 backdrop-blur-md text-white rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 group-hover:opacity-100 group-hover:pointer-events-auto"
+  >
+    <li>
+      <a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=man" class="block px-4 py-2 hover:bg-white/20 hover:text-white transition duration-200 rounded-t">
+        Homme
+      </a>
+    </li>
+    <li>
+      <a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="block px-4 py-2 hover:bg-white/20 hover:text-white transition duration-200 rounded-b">
+        Femme
+      </a>
+    </li>
+  </ul>
+</li>
+<a href="/boutique-en-ligne/cart">Mon Panier</a>
 
-<li><a href="." class="hover:opacity-80">Mon Compte</a></li>
+                  <li class="relative group">
+                    <button
+                      id="compteBtn"
+                      class="hover:opacity-80 flex items-center"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                    <i class="fa-regular fa-user"></i> <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                    <ul
+                      id="compteMenu"
+                      class="absolute top-full mt-2 left-0 w-40 bg-white/10 backdrop-blur-md text-white rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 group-hover:opacity-100 group-hover:pointer-events-auto"
+                    >
+                      <li>
+                        <a href="/boutique-en-ligne/register" class="block px-4 py-2 text-sm hover:bg-white/20 hover:text-white transition duration-200 rounded-t">
+                          <small>Pas encore inscrit ? <span class="underline">Inscrivez-vous</span></small>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/boutique-en-ligne/login" class="block px-4 py-2 text-sm hover:bg-white/20 hover:text-white transition duration-200">
+                          Se connecter
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/boutique-en-ligne/profile" class="block px-4 py-2 text-sm hover:bg-white/20 hover:text-white transition duration-200 rounded-b">
+                          Mon Compte
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/boutique-en-ligne/profile" class="block px-4 py-2 text-sm hover:bg-white/20 hover:text-white transition duration-200 rounded-b">
+                          Déconnexion
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
 
-   <a href="/boutique-en-ligne/cart">Mon Panier</a>
+
+
+
+   
 
     </ul>
 
@@ -83,7 +129,7 @@
       <li><a href="">Collection</a></li>
  <a href="/boutique-en-ligne/cart">Mon Panier</a>
 
-      <li><a href="#">Mon Compte</a></li>
+  
      
       <li>
         <!-- Mobile  Sexe -->
@@ -99,6 +145,21 @@
           <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman">Femme</a></li>
         </ul>
       </li>
+<!-- Mobile Compte -->
+<li>
+  <button
+    id="compteMobile"
+    class="w-full text-left flex items-center justify-between"
+    aria-expanded="false"
+  ><i class="fa-regular fa-user"></i> <i class="fas fa-chevron-down"></i>
+  </button>
+  <ul id="compteMenuMobile" class="mt-2 ml-4 space-y-2 hidden">
+    <li><a href="/boutique-en-ligne/login">Se Connecter</a></li>
+    <li><a href="/boutique-en-ligne/register">S'inscrire</a></li>
+      <li><a href="/boutique-en-ligne/profile">Mon Compte</a></li>
+  </ul>
+</li>
+
    
     </ul>
   </div>
@@ -125,22 +186,26 @@ sexBtnMobile.addEventListener('click', () => {
 });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btnMobile = document.getElementById("compteMobile");
+    const menuMobile = document.getElementById("compteMenuMobile");
 
-    <!-- Menu mobile -->
-    <div id="mobileMenu" class="hidden md:hidden bg-black/80">
-      <ul class="flex flex-col p-6 space-y-4 text-white">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blocks</a></li>
-        <li><a href="#">Patterns</a></li>
-        <li><a href="#">Templates</a></li>
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">Contact</a></li>
-        <li>
-        
-        </li>
-      </ul>
-    </div>
+    btnMobile.addEventListener("click", function () {
+      const isExpanded = btnMobile.getAttribute("aria-expanded") === "true";
+
+      if (isExpanded) {
+        menuMobile.classList.add("hidden");
+        btnMobile.setAttribute("aria-expanded", "false");
+      } else {
+        menuMobile.classList.remove("hidden");
+        btnMobile.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+</script>
+
+  
   </nav>
 
 
@@ -283,6 +348,36 @@ sexBtnMobile.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
   </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const compteBtn = document.getElementById("compteBtn");
+    const compteMenu = document.getElementById("compteMenu");
+
+    compteBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const isVisible = compteMenu.classList.contains("opacity-100");
+
+  
+      compteMenu.classList.remove( "pointer-events-auto");
+      compteMenu.classList.add("opacity-0", "pointer-events-none");
+      compteBtn.setAttribute("aria-expanded", "false");
+
+      
+      if (!isVisible) {
+        compteMenu.classList.remove("opacity-0", "pointer-events-none");
+        compteMenu.classList.add("opacity-100", "pointer-events-auto");
+        compteBtn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+   
+    document.addEventListener("click", function () {
+      compteMenu.classList.remove("opacity-100", "pointer-events-auto");
+      compteMenu.classList.add("opacity-0", "pointer-events-none");
+      compteBtn.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>
 
 </body>
 </html>

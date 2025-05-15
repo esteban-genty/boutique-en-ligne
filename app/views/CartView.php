@@ -21,6 +21,10 @@
 
 </head>
 
+
+
+
+<!----------------------- PANIER------------>
 <header class="relative h-[75vh] overflow-hidden">
 
 
@@ -148,10 +152,6 @@ sexBtnMobile.addEventListener('click', () => {
 
 
 </header>
-
-
-
-<!----------------------- PANIER------------>
 
 <div class="cart-container">
                   <h1>Votre Panier</h1>
