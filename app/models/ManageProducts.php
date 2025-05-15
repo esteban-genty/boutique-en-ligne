@@ -19,7 +19,11 @@ class ManageProducts{
     // add product
     public function addProduct($data)
     {
-        $stmt = $this->db->prepare("INSERT INTO product (name, description, price, gender_id, garment_id, color_id, size_id, stock_quantity, image) VALUES (?, ?, ?, ?)");
+        $stmt = $this->db->prepare("
+            INSERT INTO product (name, description, price, gender_id, garment_id, color_id, size_id, stock_quantity, image)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+    
         return $stmt->execute([
             $data['name'],
             $data['description'],
@@ -29,9 +33,10 @@ class ManageProducts{
             $data['color_id'],
             $data['size_id'],
             $data['stock_quantity'],
-            $data['image']
+            $data['image_url']
         ]);
     }
+    
 
     public function selectGender()
     {
@@ -39,7 +44,24 @@ class ManageProducts{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    // Update product
+    public function selectGarment()
+    {
+        $stmt = $this->db->query('SELECT * FROM garment');
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function selectColor()
+    {
+        $stmt = $this->db->query('SELECT * FROM color');
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function selectSize()
+    {
+        $stmt = $this->db->query('SELECT * FROM size');
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getAllProducts()
     {
         $stmt = $this->db->query('SELECT * FROM product');

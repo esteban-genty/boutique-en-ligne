@@ -17,10 +17,17 @@ class ProductsController
     public function show()
     {
         $genders = $this->productModel->selectGender();
+        $garments = $this->productModel->selectGarment();
+        $colors = $this->productModel->selectColor();
+        $sizes = $this->productModel->selectSize();
     
         $this->render('manage_products', [
-            'genders' => $genders
+            'genders' => $genders,
+            'garments' => $garments,
+            'colors' => $colors,
+            'sizes' => $sizes,
         ]);
+        
     }
     
 
@@ -40,18 +47,17 @@ class ProductsController
                 'image_url' => trim($_POST['image_url']),
             ];
 
-
-            $this->productModel->addProduct($data);
-            header('Location: /boutique-en-ligne/manage_products');
-            exit;
+            var_dump($data);
+            die('Formulaire bien soumis');
         }
     }
-
 
     private function render($view, $data = [])
     {
         extract($data);
-        define('APP_ACCESS', true);
+        if (!defined('APP_ACCESS')) {
+            define('APP_ACCESS', true);
+        }        
         require_once "app/views/$view.php";
     }
 }
