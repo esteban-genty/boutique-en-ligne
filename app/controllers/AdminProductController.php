@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Product;
+use App\Helpers\Flash;
 
 class AdminProductController
 {
@@ -23,6 +24,7 @@ class AdminProductController
     // Récupérer et valider les données POST
     $productModel = new Product();
     $productModel->create($_POST);
+    Flash::set('success', 'Product successfully created.');
     header('Location: /boutique-en-ligne/admin/products');
   }
 
@@ -37,6 +39,7 @@ class AdminProductController
   {
     $productModel = new Product();
     $productModel->update($id, $_POST);
+    Flash::set('success', 'Product successfully updated.');
     header('Location: /boutique-en-ligne/admin/products');
   }
 
@@ -44,6 +47,7 @@ class AdminProductController
   {
     $productModel = new Product();
     $productModel->delete($id);
+    Flash::set('success', 'Product successfully deleted.');
     header('Location: /boutique-en-ligne/admin/products');
   }
 }

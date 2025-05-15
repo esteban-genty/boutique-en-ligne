@@ -1,3 +1,13 @@
+<?php
+
+use App\Helpers\Flash;
+
+if ($msg = Flash::get('success')) {
+  echo "<p style='color: green;'>$msg</p>";
+}
+?>
+
+
 <h2>Liste des produits</h2>
 
 <a href="/boutique-en-ligne/admin/products/create">➕ Ajouter un produit</a>
