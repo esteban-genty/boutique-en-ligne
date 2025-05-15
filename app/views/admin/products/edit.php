@@ -22,7 +22,8 @@
     <option value="">-- Garment --</option>
     <option value="1" <?= $product['garment_id'] == 1 ? 'selected' : '' ?>>T-shirt</option>
     <option value="2" <?= $product['garment_id'] == 2 ? 'selected' : '' ?>>Pantalon</option>
-    <option value="3" <?= $product['garment_id'] == 3 ? 'selected' : '' ?>>Pull</option>
+    <option value="3" <?= $product['garment_id'] == 3 ? 'selected' : '' ?>>Shoes</option>
+    <option value="4" <?= $product['garment_id'] == 4 ? 'selected' : '' ?>>Hat</option>
   </select><br>
 
   <label>Color:</label><br>
@@ -31,14 +32,17 @@
     <option value="1" <?= $product['color_id'] == 1 ? 'selected' : '' ?>>Noir</option>
     <option value="2" <?= $product['color_id'] == 2 ? 'selected' : '' ?>>Blanc</option>
     <option value="3" <?= $product['color_id'] == 3 ? 'selected' : '' ?>>Bleu</option>
+    <option value="4" <?= $product['color_id'] == 4 ? 'selected' : '' ?>>Gris</option>
   </select><br>
 
   <label>Size:</label><br>
   <select name="size_id" required>
     <option value="">-- Size --</option>
-    <option value="1" <?= $product['size_id'] == 1 ? 'selected' : '' ?>>S</option>
-    <option value="2" <?= $product['size_id'] == 2 ? 'selected' : '' ?>>M</option>
-    <option value="3" <?= $product['size_id'] == 3 ? 'selected' : '' ?>>L</option>
+    <option value="1" <?= $product['size_id'] == 1 ? 'selected' : '' ?>>XS</option>
+    <option value="2" <?= $product['size_id'] == 2 ? 'selected' : '' ?>>S</option>
+    <option value="3" <?= $product['size_id'] == 3 ? 'selected' : '' ?>>M</option>
+    <option value="4" <?= $product['size_id'] == 4 ? 'selected' : '' ?>>L</option>
+    <option value="5" <?= $product['size_id'] == 5 ? 'selected' : '' ?>>XL</option>
   </select><br>
 
   <label>Image URL:</label><br>

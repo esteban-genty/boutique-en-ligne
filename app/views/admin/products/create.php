@@ -20,9 +20,10 @@
   <label>Garment:</label><br>
   <select name="garment_id" required>
     <option value="">-- Garment --</option>
+    <option value="1">Hat</option>
     <option value="1">T-shirt</option>
-    <option value="2">Pantalon</option>
-    <option value="3">Pull</option>
+    <option value="2">Pants</option>
+    <option value="3">Shoes</option>
   </select><br>
 
   <label>Color:</label><br>
@@ -31,14 +32,17 @@
     <option value="1">Noir</option>
     <option value="2">Blanc</option>
     <option value="3">Bleu</option>
+    <option value="3">gris</option>
   </select><br>
 
   <label>Size:</label><br>
   <select name="size_id" required>
     <option value="">-- Size --</option>
-    <option value="1">S</option>
+    <option value="1">XS</option>
+    <option value="2">S</option>
     <option value="2">M</option>
     <option value="3">L</option>
+    <option value="3">XL</option>
   </select><br>
 
   <label>Image URL:</label><br>
