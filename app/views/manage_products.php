@@ -8,10 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carteo - Ajout Catégorie</title>
 
-    <!-- Fichier styles -->
+    <!-- Styles files -->
     <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/ajouter-categories-plats.css">
-    <link rel="stylesheet" href="../styles/root.css">
 
     <!-- Police d'écriture -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
