@@ -70,7 +70,7 @@
 </li>
 
 
-      <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
+      <li><a href="/boutique-en-ligne/profile" class="hover:opacity-80">Mon Compte</a></li>
     </ul>
 
     <!-- Burger mobile -->

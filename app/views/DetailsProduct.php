@@ -68,7 +68,7 @@
 </li>
 
 
-      <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
+      <li><a href="/boutique-en-ligne/profile" class="hover:opacity-80">Mon Compte</a></li>
     </ul>
 
     <!-- Burger mobile -->
@@ -85,7 +85,7 @@
    <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=unisexe">Collection</a></li>
 <li><a href="?controller=cart&action=index" class="hover:opacity-80">Mon Panier</a></li>
 
-      <li><a href="#">Mon Compte</a></li>
+      <li><a href="/boutique-en-ligne/profile">Mon Compte</a></li>
       <li>
         <!-- Mobile  Sexe -->
         <button
