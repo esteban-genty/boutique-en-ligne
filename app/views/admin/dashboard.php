@@ -308,6 +308,8 @@ sexBtnMobile.addEventListener('click', () => {
             </form>
         </div>
     </div>
+
+    
 <footer class="bg-gray-900 text-white w-full">
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
     
