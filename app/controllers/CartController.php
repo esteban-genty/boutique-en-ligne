@@ -66,9 +66,42 @@ foreach ($products as $key => $product) {
 
 public function clear()
 {
-    unset($_SESSION['cart']); // Efface le panier
-    header('Location: /boutique-en-ligne/cart'); // Redirige vers la page panier
+    unset($_SESSION['cart']); 
+    header('Location: /boutique-en-ligne/cart');
     exit;
+}
+public function checkout()
+{
+    $cart = $_SESSION['cart'] ?? [];
+
+    if (empty($cart)) {
+
+        header('Location: /boutique-en-ligne/cart');
+        exit;
+    }
+
+
+    $ids = array_keys($cart);
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+    $pdo = \App\Models\Database::connect();
+    $sql = "SELECT id, name, price, image_url FROM product WHERE id IN ($placeholders)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($ids);
+    $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    foreach ($products as $key => $product) {
+        $quantity = $cart[$product['id']];
+        $products[$key]['quantity'] = $quantity;
+        $products[$key]['subtotal'] = $quantity * $product['price'];
+    }
+
+    $total = array_sum(array_column($products, 'subtotal'));
+
+    $pageTitle = 'Finaliser votre commande';
+
+    require_once __DIR__ . '/../views/checkout.php';
+
 }
 
 

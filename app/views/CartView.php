@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMNI</title>
-<script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="./public/js/asssets/checkout.js" defer></script>
 
 
   <!-- TailwindCSS  -->
@@ -214,13 +215,16 @@ sexBtnMobile.addEventListener('click', () => {
                                                     
                                                     </div>
 
-                                                  <form id="payment-form">
-                                                      <div id="card-element">
-                                                          <!-- Le champ de carte de crédit sera inséré ici -->
-                                                      </div>
-                                                      <button id="submit">Payer</button>
-                                                      <div id="error-message"></div>
-                                                  </form>
+                                             <form id="payment-form">
+      <div id="payment-element">
+        <!--Stripe.js injects the Payment Element-->
+      </div>
+      <button id="submit">
+        <div class="spinner hidden" id="spinner"></div>
+        <span id="button-text">Pay now</span>
+      </button>
+      <div id="payment-message" class="hidden"></div>
+    </form>
 
                                                   </form>
 
