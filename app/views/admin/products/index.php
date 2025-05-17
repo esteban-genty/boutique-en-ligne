@@ -204,18 +204,19 @@ sexBtnMobile.addEventListener('click', () => {
 
 
 </header>
-<!-------- MAIN CONTENT------------------------->
-<div class="min-h-screen bg-gradient-to-tr from-white via-slate-100 to-slate-50 p-8 text-slate-700 font-inter">
+
+<div class="min-h-screen bg-gradient-to-tr from-white via-slate-100 to-slate-50 p-4 sm:p-8 text-slate-700 font-inter">
   <div class="max-w-6xl mx-auto">
-    <div class="flex items-center justify-between mb-8">
-      <h2 class="text-4xl font-black tracking-tight text-slate-800">📦 Produits</h2>
+  
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-slate-800">📦 Produits</h2>
       <a href="/boutique-en-ligne/admin/products/create"
-         class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full shadow hover:bg-slate-700 transition">
+         class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full shadow hover:bg-slate-700 transition">
         ➕ Ajouter un produit
       </a>
     </div>
 
-    <div class="overflow-x-auto bg-white/80 backdrop-blur-md shadow-xl rounded-2xl border border-slate-200">
+    <div class="hidden md:block overflow-hidden bg-white/80 backdrop-blur-md shadow-xl rounded-2xl border border-slate-200">
       <table class="min-w-full table-auto">
         <thead class="text-slate-500 text-xs uppercase bg-slate-50">
           <tr>
@@ -227,47 +228,67 @@ sexBtnMobile.addEventListener('click', () => {
           </tr>
         </thead>
         <tbody class="text-sm divide-y divide-slate-100">
-          <?php if (!empty($products)) : ?>
-            <?php foreach ($products as $product) : ?>
-              <tr class="hover:bg-slate-50 transition">
-                <td class="px-6 py-4 font-mono text-slate-600"><?= htmlspecialchars($product['id']) ?></td>
-                <td class="px-6 py-4 font-semibold"><?= htmlspecialchars($product['name']) ?></td>
-                <td class="px-6 py-4"><?= htmlspecialchars($product['price']) ?> €</td>
-                <td class="px-6 py-4">
-                  <?php if ($product['stock_quantity'] > 10) : ?>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-semibold animate-pulse">
-                      🟢 En stock
-                    </span>
-                  <?php elseif ($product['stock_quantity'] > 0) : ?>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-600 rounded-full text-xs font-semibold">
-                      🟡 Limité
-                    </span>
-                  <?php else : ?>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-xs font-semibold">
-                      🔴 Rupture
-                    </span>
-                  <?php endif; ?>
-                </td>
-                <td class="px-6 py-4 space-x-3">
-                  <a href="/boutique-en-ligne/admin/products/edit/<?= $product['id'] ?>"
-                     class="text-indigo-600 hover:underline font-medium">Modifier</a>
-                  <a href="/boutique-en-ligne/admin/products/delete/<?= $product['id'] ?>"
-                     onclick="return confirm('Supprimer ce produit ?');"
-                     class="text-rose-600 hover:underline font-medium"> Supprimer</a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          <?php else : ?>
-            <tr>
-              <td colspan="5" class="px-6 py-8 text-center text-slate-400 italic">Aucun produit trouvé.</td>
+          <?php foreach ($products as $product): ?>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-6 py-4 font-mono text-slate-600"><?= htmlspecialchars($product['id']) ?></td>
+              <td class="px-6 py-4 font-semibold"><?= htmlspecialchars($product['name']) ?></td>
+              <td class="px-6 py-4"><?= htmlspecialchars($product['price']) ?> €</td>
+              <td class="px-6 py-4">
+                <?php if ($product['stock_quantity'] > 10): ?>
+                  <span class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-semibold animate-pulse">
+                    🟢 En stock
+                  </span>
+                <?php elseif ($product['stock_quantity'] > 0): ?>
+                  <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-600 rounded-full text-xs font-semibold">
+                    🟡 Limité
+                  </span>
+                <?php else: ?>
+                  <span class="inline-flex items-center gap-1 px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-xs font-semibold">
+                    🔴 Rupture
+                  </span>
+                <?php endif; ?>
+              </td>
+              <td class="px-6 py-4 space-x-3">
+                <a href="/boutique-en-ligne/admin/products/edit/<?= $product['id'] ?>" class="text-indigo-600 hover:underline font-medium">Modifier</a>
+                <a href="/boutique-en-ligne/admin/products/delete/<?= $product['id'] ?>" onclick="return confirm('Supprimer ce produit ?');" class="text-rose-600 hover:underline font-medium">Supprimer</a>
+              </td>
             </tr>
-          <?php endif; ?>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
+
+    <!-- Mobile Cards -->
+    <div class="md:hidden space-y-4">
+      <?php foreach ($products as $product): ?>
+        <div class="bg-white/80 backdrop-blur-md shadow-lg rounded-xl p-4 border border-slate-200">
+          <div class="text-sm font-semibold text-slate-500 mb-1">Produit #<?= htmlspecialchars($product['id']) ?></div>
+          <div class="text-lg font-bold text-slate-800"><?= htmlspecialchars($product['name']) ?></div>
+          <div class="text-slate-600 mb-2"><?= htmlspecialchars($product['price']) ?> €</div>
+          <div class="mb-3">
+            <?php if ($product['stock_quantity'] > 10): ?>
+              <span class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-semibold animate-pulse">
+                🟢 En stock
+              </span>
+            <?php elseif ($product['stock_quantity'] > 0): ?>
+              <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-600 rounded-full text-xs font-semibold">
+                🟡 Limité
+              </span>
+            <?php else: ?>
+              <span class="inline-flex items-center gap-1 px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-xs font-semibold">
+                🔴 Rupture
+              </span>
+            <?php endif; ?>
+          </div>
+          <div class="flex justify-end gap-4 text-sm font-medium">
+            <a href="/boutique-en-ligne/admin/products/edit/<?= $product['id'] ?>" class="text-indigo-600 hover:underline">Modifier</a>
+            <a href="/boutique-en-ligne/admin/products/delete/<?= $product['id'] ?>" onclick="return confirm('Supprimer ce produit ?');" class="text-rose-600 hover:underline">Supprimer</a>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
   </div>
 </div>
-
 
    
 <footer class="bg-gray-900 text-white w-full">
