@@ -33,58 +33,75 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-switch ($uri) {
-    case '/boutique-en-ligne/':
-    case '/boutique-en-ligne':
-        $controller = new App\Controllers\HomeController();
-        $controller->index();
-        break;
+use App\Controllers\HomeController;
+use App\Controllers\AuthController;
+use App\Controllers\ProfileController;
+use App\Controllers\AdminController;
+use App\Controllers\AdminProductController;
 
-    case '/boutique-en-ligne/products':
-        $controller = new App\Controllers\ProductController();
-        $controller->index();
-        break;
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    case '/boutique-en-ligne/login':
-        $controller = new App\Controllers\AuthController();
-        $controller->login();
-        break;
+// Redirections simples
+switch (true) {
+  case $uri === '/boutique-en-ligne/' || $uri === '/boutique-en-ligne':
+    header('Location: /boutique-en-ligne/login');
+    exit;
 
-    case '/boutique-en-ligne/logout':
-        $controller = new App\Controllers\AuthController();
-        $controller->logout();
-        break;
-
-    case '/boutique-en-ligne/register':
-        $controller = new App\Controllers\AuthController();
-        $controller->register();
-        break;
-
-    case '/boutique-en-ligne/profile':
-        $controller = new App\Controllers\ProfileController();
-        $controller->show();
-        break;
-
-    case '/boutique-en-ligne/profile/update':
-        $controller = new App\Controllers\ProfileController();
-        $controller->update();
-        break;
-case '/boutique-en-ligne/cart/add':
-    $controller = new App\Controllers\CartController();
-    $controller->add();
-    break;
-case '/boutique-en-ligne/cart':
-    $controller = new App\Controllers\CartController();
-    $controller->show();
-    break;
-case '/boutique-en-ligne/cart/clear':
-    $controller = new App\Controllers\CartController();
-    $controller->clear();
+  case $uri === '/boutique-en-ligne/home':
+    (new HomeController())->index();
     break;
 
+  case $uri === '/boutique-en-ligne/login':
+    (new AuthController())->login();
+    break;
 
-    default:
-        http_response_code(404);
-        echo "404 Not Found: The page you requested does not exist.";
-        break;
+  case $uri === '/boutique-en-ligne/logout':
+    (new AuthController())->logout();
+    break;
+
+  case $uri === '/boutique-en-ligne/register':
+    (new AuthController())->register();
+    break;
+
+  case $uri === '/boutique-en-ligne/profile':
+    (new ProfileController())->show();
+    break;
+
+  case $uri === '/boutique-en-ligne/profile/update':
+    (new ProfileController())->update();
+    break;
+
+  case $uri === '/boutique-en-ligne/admin/dashboard':
+    (new AdminController())->dashboard();
+    break;
+
+  // CRUD Produits Admin
+  case $uri === '/boutique-en-ligne/admin/products':
+    (new AdminProductController())->index();
+    break;
+
+  case $uri === '/boutique-en-ligne/admin/products/create':
+    (new AdminProductController())->create();
+    break;
+
+  case $uri === '/boutique-en-ligne/admin/products/store':
+    (new AdminProductController())->store();
+    break;
+
+  case preg_match('#^/boutique-en-ligne/admin/products/edit/(\d+)$#', $uri, $matches):
+    (new AdminProductController())->edit($matches[1]);
+    break;
+
+  case preg_match('#^/boutique-en-ligne/admin/products/update/(\d+)$#', $uri, $matches):
+    (new AdminProductController())->update($matches[1]);
+    break;
+
+  case preg_match('#^/boutique-en-ligne/admin/products/delete/(\d+)$#', $uri, $matches):
+    (new AdminProductController())->delete($matches[1]);
+    break;
+
+  default:
+    http_response_code(404);
+    echo "404 Not Found";
+    break;
 }
