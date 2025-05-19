@@ -45,7 +45,7 @@
   <nav class="absolute inset-x-0 top-0 z-20">
     <div class="max-w-7xl mx-auto flex items-center justify-between p-6">
       <div class="text-2xl font-bold text-white">
-        <a href="/boutique-en-ligne" class="no-underline text-white hover:opacity-80">OMNI</a>
+        <a href="/boutique-en-ligne/home" class="no-underline text-white hover:opacity-80">OMNI</a>
       </div>
 
       <!-- Desktop Menu -->
@@ -60,7 +60,7 @@
             <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&gender=woman" class="block px-4 py-2 hover:bg-gray-200">Femme</a></li>
           </ul>
         </li>
-        <li><a href="#" class="hover:opacity-80">Mon Panier</a></li>
+        <li><a href="/boutique-en-ligne/cart" class="hover:opacity-80">Mon Panier</a></li>
         <li><a href="#" class="hover:opacity-80">Mon Compte</a></li>
       </ul>
 

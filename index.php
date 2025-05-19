@@ -34,6 +34,7 @@ use App\Controllers\AuthController;
 use App\Controllers\ProfileController;
 use App\Controllers\AdminController;
 use App\Controllers\AdminProductController;
+use App\Controllers\CartController;
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controllerName = ucfirst(strtolower($_GET['controller'])) . 'Controller';
@@ -80,6 +81,18 @@ switch (true) {
   case $uri === '/boutique-en-ligne/logout':
     (new AuthController())->logout();
     break;
+case $uri === '/boutique-en-ligne/cart':
+    (new CartController())->show();
+    break;
+
+case $uri === '/boutique-en-ligne/cart/add':
+    (new CartController())->add();
+    break;
+    case $uri === '/boutique-en-ligne/cart/clear':
+    (new CartController())->clear();
+    break;
+
+
 
   case $uri === '/boutique-en-ligne/register':
     (new AuthController())->register();

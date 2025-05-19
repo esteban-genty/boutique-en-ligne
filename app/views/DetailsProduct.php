@@ -36,7 +36,7 @@
   <div class="max-w-7xl mx-auto flex items-center justify-between p-6">
    
      <div class="text-2xl font-bold text-white">
-  <a href="/boutique-en-ligne" class="no-underline text-white hover:opacity-80">OMNI</a>
+  <a href="/boutique-en-ligne/home" class="no-underline text-white hover:opacity-80">OMNI</a>
 </div>
 
 

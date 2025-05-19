@@ -11,7 +11,7 @@ class User
   public function __construct()
   {
     $this->db = Database::connect();
->>>>>>> feature/admin-product-crud
+
   }
 
   public function findByEmail($email)

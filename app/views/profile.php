@@ -37,7 +37,7 @@
 <nav class="absolute inset-x-0 top-0 z-20">
   <div class="max-w-7xl mx-auto flex items-center justify-between p-6">
    
-    <div class="text-2xl font-bold text-white">OMNI</div>
+    <div class="text-2xl font-bold text-white"><a href="/boutique-en-ligne"></a>OMNI</div>
 
     <ul class="hidden md:flex space-x-8 text-white items-center">
       <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=all" class="hover:opacity-80">Collection</a></li>
