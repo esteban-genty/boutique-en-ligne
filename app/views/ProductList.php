@@ -93,61 +93,7 @@
 </header>
 
 
-<script>
-  // Desktop 
-  const sexBtn = document.getElementById('sexBtn');
-  const sexMenu = document.getElementById('sexMenu');
 
-  sexBtn.addEventListener('click', () => {
-    const expanded = sexBtn.getAttribute('aria-expanded') === 'true';
-    sexBtn.setAttribute('aria-expanded', String(!expanded));
-    sexMenu.classList.toggle('opacity-100');
-    sexMenu.classList.toggle('pointer-events-auto');
-  });
-
-  // Mobile 
-  const burgerBtn = document.getElementById('burgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  burgerBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-
-  // Mobile Sexe
-  const sexBtnMobile = document.getElementById('sexBtnMobile');
-  const sexMenuMobile = document.getElementById('sexMenuMobile');
-
-  sexBtnMobile.addEventListener('click', () => {
-    const expanded = sexBtnMobile.getAttribute('aria-expanded') === 'true';
-    sexBtnMobile.setAttribute('aria-expanded', String(!expanded));
-    sexMenuMobile.classList.toggle('hidden');
-  });
-</script>
-
-
-
-
-
-
-    <!-- Menu mobile -->
-    <div id="mobileMenu" class="hidden md:hidden bg-black/80">
-      <ul class="flex flex-col p-6 space-y-4 text-white">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blocks</a></li>
-        <li><a href="#">Patterns</a></li>
-        <li><a href="#">Templates</a></li>
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">Contact</a></li>
-        <li>
-        
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-
-</header>
 
     <main class="products-container">
 
@@ -254,7 +200,8 @@
             <div class="product-meta">
                 <span class="product-price">€<?= number_format($price, 2, ',', ' ') ?></span>
                 <div class="product-actions">
-                    <button class="cart-button" aria-label="Ajouter au panier"></button>
+                    <button class="cart-button" aria-label="Ajouter au panier" data-id="<?= $product['id'] ?>"></button>
+
                     <button class="like-button" aria-label="Ajouter aux favoris"></button>
                 </div>
             </div>
@@ -265,6 +212,35 @@
         <hr class="product-separator">
     <?php endif; ?>
 <?php endforeach; ?>
+<!----------AJOUT AU Panier -------------->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.cart-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.dataset.id;
+
+            fetch('/boutique-en-ligne/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Produit ajouté au panier !");
+                } else {
+                    alert("Erreur : " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur :', error);
+            });
+        });
+    });
+});
+</script>
 
 
 
@@ -395,7 +371,7 @@
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Nom de marque</a></li>
+        <li><a href="#" class="text-base hover:text-blue-400 transition">OMNI</a></li>
       </ul>
     </div>
   </div>
@@ -413,6 +389,51 @@
       mobileMenu.classList.toggle('hidden');
     });
   </script>
+  <script>
+  // === Desktop ===
+  const sexBtn     = document.getElementById('sexBtn');
+  const sexMenu    = document.getElementById('sexMenu');
+
+  sexBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = sexBtn.getAttribute('aria-expanded') === 'true';
+
+    sexBtn.setAttribute('aria-expanded', String(!isOpen));
+    sexMenu.classList.toggle('opacity-0');
+    sexMenu.classList.toggle('pointer-events-none');
+    sexMenu.classList.toggle('opacity-100');
+    sexMenu.classList.toggle('pointer-events-auto');
+  });
+
+  // Fermer si on clique en dehors
+  document.addEventListener('click', e => {
+    if (!sexBtn.contains(e.target) && !sexMenu.contains(e.target)) {
+      sexBtn.setAttribute('aria-expanded', 'false');
+      sexMenu.classList.add('opacity-0', 'pointer-events-none');
+      sexMenu.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+  });
+
+  // === Mobile ===
+  const sexBtnMobile  = document.getElementById('sexBtnMobile');
+  const sexMenuMobile = document.getElementById('sexMenuMobile');
+
+  sexBtnMobile.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = sexBtnMobile.getAttribute('aria-expanded') === 'true';
+
+    sexBtnMobile.setAttribute('aria-expanded', String(!isOpen));
+    sexMenuMobile.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', e => {
+    if (!sexBtnMobile.contains(e.target) && !sexMenuMobile.contains(e.target)) {
+      sexBtnMobile.setAttribute('aria-expanded', 'false');
+      sexMenuMobile.classList.add('hidden');
+    }
+  });
+</script>
+
 </body>
 </html>
 
