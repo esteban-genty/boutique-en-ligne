@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use App\Core\Database;
+
 class User
 {
   private $db;
 
   public function __construct()
   {
-    try {
-      $this->db = new \PDO('mysql:host=localhost;dbname=omni', 'root', '');
-      $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    } catch (\PDOException $e) {
-      die('Erreur de connexion à la base de données : ' . $e->getMessage());
-    }
+    $this->db = Database::connect();
+>>>>>>> feature/admin-product-crud
   }
 
   public function findByEmail($email)

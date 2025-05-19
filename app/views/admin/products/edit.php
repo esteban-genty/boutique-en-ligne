@@ -197,56 +197,110 @@ sexBtnMobile.addEventListener('click', () => {
 
 </header>
 
+<!----------------------------------- MAIN CONTENT--------------------->
 
-<div class="flex flex-col md:flex-row min-h-screen">
-  <!-- IMAGE -->
-  <div class="md:w-1/2 bg-gray-800 hidden md:block">
-    <img src="" alt="Connexion Image" class="h-full w-full object-cover" />
-  </div>
+<div class="min-h-screen bg-slate-50 py-12 px-6">
+  <div class="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-10 border border-slate-200">
+    <h2 class="text-3xl font-bold text-slate-800 mb-6"> Modifier un produit</h2>
 
-  <!-- FORMULAIRE -->
-  <div class="md:w-1/2 flex flex-col justify-center items-center p-8">
-    <div class="w-full max-w-md">
-      <h1 class="text-3xl font-bold mb-8 text-center">Connexion</h1>
+    <form method="POST" action="/boutique-en-ligne/admin/products/update/<?= $product['id'] ?>" class="space-y-6">
 
-      <?php if (isset($error)): ?>
-      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-        <p><?= $error ?></p>
+      <div>
+        <label class="block text-sm font-medium text-slate-700">Nom</label>
+        <input type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" required
+          class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 focus:ring-2 focus:ring-blue-600 focus:outline-none">
       </div>
-      <?php endif; ?>
 
-      <form action="/boutique-en-ligne/login" method="POST" class="space-y-6">
-        <div>
-          <input type="email" name="email" placeholder="Email" required
-            class="mt-1 block w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-all" />
-        </div>
-
-        <div>
-          <input type="password" name="password" placeholder="Mot de passe" required
-            class="mt-1 block w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-all" />
-        </div>
-
-        <div>
-          <button type="submit"
-            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Connexion
-          </button>
-        </div>
-      </form>
-
-      <div class="mt-6 text-center">
-        <p class="text-sm text-gray-600">
-          Pas encore de compte ?
-          <a href="/boutique-en-ligne/register" class="font-medium text-blue-600 hover:text-blue-500">
-            Inscription
-          </a>
-        </p>
+      <div>
+        <label class="block text-sm font-medium text-slate-700">Description</label>
+        <textarea name="description"
+          class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 focus:ring-2 focus:ring-blue-600 focus:outline-none"><?= htmlspecialchars($product['description']) ?></textarea>
       </div>
-    </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Prix (€)</label>
+          <input type="number" step="0.01" name="price" value="<?= $product['price'] ?>" required
+            class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Quantité en stock</label>
+          <input type="number" name="stock_quantity" value="<?= $product['stock_quantity'] ?>" required
+            class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Genre</label>
+          <select name="gender_id" required
+            class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 bg-white focus:ring-2 focus:ring-blue-600 focus:outline-none">
+            <option value="">-- Genre --</option>
+            <option value="1" <?= $product['gender_id'] == 1 ? 'selected' : '' ?>>Homme</option>
+            <option value="2" <?= $product['gender_id'] == 2 ? 'selected' : '' ?>>Femme</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Vêtement</label>
+          <select name="garment_id" required
+            class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 bg-white focus:ring-2 focus:ring-blue-600 focus:outline-none">
+            <option value="">-- Vêtement --</option>
+            <option value="1" <?= $product['garment_id'] == 1 ? 'selected' : '' ?>>T-shirt</option>
+            <option value="2" <?= $product['garment_id'] == 2 ? 'selected' : '' ?>>Pantalon</option>
+            <option value="3" <?= $product['garment_id'] == 3 ? 'selected' : '' ?>>Shoes</option>
+            <option value="4" <?= $product['garment_id'] == 4 ? 'selected' : '' ?>>Hat</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Couleur</label>
+          <select name="color_id" required
+            class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 bg-white focus:ring-2 focus:ring-blue-600 focus:outline-none">
+            <option value="">-- Couleur --</option>
+            <option value="1" <?= $product['color_id'] == 1 ? 'selected' : '' ?>>Noir</option>
+            <option value="2" <?= $product['color_id'] == 2 ? 'selected' : '' ?>>Blanc</option>
+            <option value="3" <?= $product['color_id'] == 3 ? 'selected' : '' ?>>Bleu</option>
+            <option value="4" <?= $product['color_id'] == 4 ? 'selected' : '' ?>>Gris</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Taille</label>
+          <select name="size_id" required
+            class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 bg-white focus:ring-2 focus:ring-blue-600 focus:outline-none">
+            <option value="">-- Taille --</option>
+            <option value="1" <?= $product['size_id'] == 1 ? 'selected' : '' ?>>XS</option>
+            <option value="2" <?= $product['size_id'] == 2 ? 'selected' : '' ?>>S</option>
+            <option value="3" <?= $product['size_id'] == 3 ? 'selected' : '' ?>>M</option>
+            <option value="4" <?= $product['size_id'] == 4 ? 'selected' : '' ?>>L</option>
+            <option value="5" <?= $product['size_id'] == 5 ? 'selected' : '' ?>>XL</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700">URL de l'image</label>
+        <input type="text" name="image_url" value="<?= htmlspecialchars($product['image_url']) ?>" required
+          class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+      </div>
+
+      <div class="pt-6">
+        <button type="submit"
+          class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">
+           Mettre à jour
+        </button>
+      </div>
+
+    </form>
   </div>
 </div>
 
 
+<!----------------------------------- MAIN CONTENT--------------------->
 
 <footer class="bg-gray-900 text-white w-full">
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">

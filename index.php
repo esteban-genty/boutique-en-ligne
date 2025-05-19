@@ -1,9 +1,8 @@
 <?php
 session_start();
-require_once __DIR__ . '/app/core/Autoloader.php';
 
+require_once __DIR__ . '/app/core/autoLoader.php';
 Autoloader::register();
-
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controllerName = ucfirst(strtolower($_GET['controller'])) . 'Controller';
@@ -30,14 +29,37 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     }
 }
 
-
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\ProfileController;
 use App\Controllers\AdminController;
 use App\Controllers\AdminProductController;
+
+if (isset($_GET['controller']) && isset($_GET['action'])) {
+    $controllerName = ucfirst(strtolower($_GET['controller'])) . 'Controller';
+    $actionName = $_GET['action'];
+
+    $controllerClass = "App\\Controllers\\$controllerName";
+
+    if (class_exists($controllerClass)) {
+        $controller = new $controllerClass();
+
+        if (method_exists($controller, $actionName)) {
+       
+            $controller->$actionName();
+            exit;
+        } else {
+            http_response_code(404);
+            echo "Erreur 404 : Méthode '$actionName' non trouvée dans $controllerClass.";
+            exit;
+        }
+    } else {
+        http_response_code(404);
+        echo "Erreur 404 : Contrôleur '$controllerClass' introuvable.";
+        exit;
+    }
+}
+
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 

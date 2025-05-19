@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -86,7 +88,6 @@
                       class="absolute top-full mt-2 left-0 w-40 bg-white/10 backdrop-blur-md text-white rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 group-hover:opacity-100 group-hover:pointer-events-auto"
                     >
                      
-                 
                       <li>
                         <a href="/boutique-en-ligne/profile" class="block px-4 py-2 text-sm hover:bg-white/20 hover:text-white transition duration-200 rounded-b">
                           Déconnexion
@@ -141,8 +142,8 @@
   ><i class="fa-regular fa-user"></i> <i class="fas fa-chevron-down"></i>
   </button>
   <ul id="compteMenuMobile" class="mt-2 ml-4 space-y-2 hidden">
-  
-      <li><a href="/boutique-en-ligne/profile">Déconnexion</a></li>
+    <li><a href="/boutique-en-ligne/login">Déconnexion</a></li>
+   
   </ul>
 </li>
 
@@ -196,58 +197,119 @@ sexBtnMobile.addEventListener('click', () => {
 
 
 </header>
-
-
-<div class="flex flex-col md:flex-row min-h-screen">
-  <!-- IMAGE -->
-  <div class="md:w-1/2 bg-gray-800 hidden md:block">
-    <img src="" alt="Connexion Image" class="h-full w-full object-cover" />
-  </div>
-
-  <!-- FORMULAIRE -->
-  <div class="md:w-1/2 flex flex-col justify-center items-center p-8">
-    <div class="w-full max-w-md">
-      <h1 class="text-3xl font-bold mb-8 text-center">Connexion</h1>
-
-      <?php if (isset($error)): ?>
-      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-        <p><?= $error ?></p>
-      </div>
-      <?php endif; ?>
-
-      <form action="/boutique-en-ligne/login" method="POST" class="space-y-6">
-        <div>
-          <input type="email" name="email" placeholder="Email" required
-            class="mt-1 block w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-all" />
-        </div>
-
-        <div>
-          <input type="password" name="password" placeholder="Mot de passe" required
-            class="mt-1 block w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-all" />
-        </div>
-
-        <div>
-          <button type="submit"
-            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Connexion
-          </button>
-        </div>
-      </form>
-
-      <div class="mt-6 text-center">
-        <p class="text-sm text-gray-600">
-          Pas encore de compte ?
-          <a href="/boutique-en-ligne/register" class="font-medium text-blue-600 hover:text-blue-500">
-            Inscription
-          </a>
-        </p>
-      </div>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation/Breadcrumb -->
+    <div class="container mx-auto px-4 py-4 text-gray-600">
+        <nav class="text-sm">
+            <a href="#" class="hover:text-blue-600">Accueil</a>
+            <span class="mx-1">/</span>
+            <span>Tableau de bord Admin</span>
+        </nav>
     </div>
-  </div>
-</div>
+
+    <div class="container mx-auto px-4 flex flex-col md:flex-row gap-8 py-6">
+        <!-- Sidebar Menu -->
+        <div class="md:w-1/4">
+            <div class="mb-6">
+                <h2 class="font-bold text-lg mb-3">Gérer mon Compte</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-blue-600 hover:underline">Mon profil</a></li>
+                 
+                </ul>
+            </div>
+
+     
+
+       
+        </div>
+
+        <!-- Main Content -->
+        <div class="md:w-3/4 bg-white p-6 border border-gray-200 rounded-md shadow-sm">
+            <!-- Admin Dashboard Section -->
+            <h2 class="text-2xl font-medium text-blue-600 mb-6">Admin Dashboard</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <a href="/boutique-en-ligne/admin/products" class="flex items-center p-4 bg-blue-50 border border-blue-100 rounded-lg hover:bg-blue-100 transition-colors">
+                    <div class="bg-blue-600 p-3 rounded-full mr-4">
+                       <!-----icon importée ----->    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                                    </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-blue-800">Gérer les produits</h3>
+                        <p class="text-sm text-gray-600">Ajouter , modifier ou supprimer produits</p>
+                    </div>
+                </a>
+                
+                <a href="/boutique-en-ligne/admin/users" class="flex items-center p-4 bg-green-50 border border-green-100 rounded-lg hover:bg-green-100 transition-colors">
+                    <div class="bg-green-600 p-3 rounded-full mr-4">
+                    <!-----icon importée ----->    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                    </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-green-800">Utilisateurs</h3>
+                        <p class="text-sm text-gray-600">Gérer Utilisateur</p>
+                    </div>
+                </a>
+                
+                <a href="/boutique-en-ligne/admin/orders" class="flex items-center p-4 bg-purple-50 border border-purple-100 rounded-lg hover:bg-purple-100 transition-colors">
+                    <div class="bg-purple-600 p-3 rounded-full mr-4">
+                        <!-----icon importée ----->   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                                      </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-purple-800">Commandes</h3>
+                        <p class="text-sm text-gray-600">Gérer et suivis des commandes</p>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- ADmin Profile Section -->
+            <h2 class="text-2xl font-medium text-blue-600 mb-4">Admin profil</h2>
+
+                                <?php if (!empty($user)) : ?>
+                                    <p class="mb-2"><strong>Nom:</strong> <?= htmlspecialchars($user['first_name'] . ' ' . $user['name']) ?></p>
+                                    <p class="mb-2"><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
+                                    <p class="mb-4"><strong>Role:</strong> <?= $user['is_admin'] ? 'Admin' : 'User' ?></p>
+                                <?php else : ?>
+                                    <p>Utilisateur non connecté ou introuvable.</p>
+                                <?php endif; ?>
 
 
 
+
+            <h3 class="text-xl font-medium text-blue-600 mb-4">Modifier le profil</h3>
+            <form method="POST" action="/boutique-en-ligne/profile/update" class="space-y-4">
+                <div class="space-y-2">
+                    <label for="first_name" class="block text-sm font-medium">Prénom :</label>
+                    <input type="text" name="first_name" id="first_name" value="<?= htmlspecialchars($user['first_name'] ?? '') ?>" class="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="name" class="block text-sm font-medium">Nom :</label>
+                    <input type="text" name="name" id="name" value="<?= htmlspecialchars($user['name'] ?? '') ?>" required class="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="email" class="block text-sm font-medium">Email :</label>
+                    <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" required class="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="password" class="block text-sm font-medium">Nouveau mot de passe (laisser vide pour ne pas changer) :</label>
+                    <input type="password" name="password" id="password" class="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="px-6 py-2 bg-blue-700 text-white text-sm font-medium rounded-md hover:bg-blue-800">Mettre à jour</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
 <footer class="bg-gray-900 text-white w-full">
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
     

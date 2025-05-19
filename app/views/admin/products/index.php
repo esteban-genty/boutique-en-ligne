@@ -1,3 +1,11 @@
+<?php
+
+use App\Helpers\Flash;
+
+if ($msg = Flash::get('success')) {
+  echo "<p style='color: green;'>$msg</p>";
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -197,57 +205,92 @@ sexBtnMobile.addEventListener('click', () => {
 
 </header>
 
+<div class="min-h-screen bg-gradient-to-tr from-white via-slate-100 to-slate-50 p-4 sm:p-8 text-slate-700 font-inter">
+  <div class="max-w-6xl mx-auto">
+  
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-slate-800">📦 Produits</h2>
+      <a href="/boutique-en-ligne/admin/products/create"
+         class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full shadow hover:bg-slate-700 transition">
+        ➕ Ajouter un produit
+      </a>
+    </div>
 
-<div class="flex flex-col md:flex-row min-h-screen">
-  <!-- IMAGE -->
-  <div class="md:w-1/2 bg-gray-800 hidden md:block">
-    <img src="" alt="Connexion Image" class="h-full w-full object-cover" />
-  </div>
+    <div class="hidden md:block overflow-hidden bg-white/80 backdrop-blur-md shadow-xl rounded-2xl border border-slate-200">
+      <table class="min-w-full table-auto">
+        <thead class="text-slate-500 text-xs uppercase bg-slate-50">
+          <tr>
+            <th class="px-6 py-4 text-left">ID</th>
+            <th class="px-6 py-4 text-left">Nom</th>
+            <th class="px-6 py-4 text-left">Prix</th>
+            <th class="px-6 py-4 text-left">Stock</th>
+            <th class="px-6 py-4 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm divide-y divide-slate-100">
+          <?php foreach ($products as $product): ?>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-6 py-4 font-mono text-slate-600"><?= htmlspecialchars($product['id']) ?></td>
+              <td class="px-6 py-4 font-semibold"><?= htmlspecialchars($product['name']) ?></td>
+              <td class="px-6 py-4"><?= htmlspecialchars($product['price']) ?> €</td>
+              <td class="px-6 py-4">
+                <?php if ($product['stock_quantity'] > 10): ?>
+                  <span class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-semibold animate-pulse">
+                    🟢 En stock
+                  </span>
+                <?php elseif ($product['stock_quantity'] > 0): ?>
+                  <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-600 rounded-full text-xs font-semibold">
+                    🟡 Limité
+                  </span>
+                <?php else: ?>
+                  <span class="inline-flex items-center gap-1 px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-xs font-semibold">
+                    🔴 Rupture
+                  </span>
+                <?php endif; ?>
+              </td>
+              <td class="px-6 py-4 space-x-3">
+                <a href="/boutique-en-ligne/admin/products/edit/<?= $product['id'] ?>" class="text-indigo-600 hover:underline font-medium">Modifier</a>
+                <a href="/boutique-en-ligne/admin/products/delete/<?= $product['id'] ?>" onclick="return confirm('Supprimer ce produit ?');" class="text-rose-600 hover:underline font-medium">Supprimer</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
 
-  <!-- FORMULAIRE -->
-  <div class="md:w-1/2 flex flex-col justify-center items-center p-8">
-    <div class="w-full max-w-md">
-      <h1 class="text-3xl font-bold mb-8 text-center">Connexion</h1>
-
-      <?php if (isset($error)): ?>
-      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-        <p><?= $error ?></p>
-      </div>
-      <?php endif; ?>
-
-      <form action="/boutique-en-ligne/login" method="POST" class="space-y-6">
-        <div>
-          <input type="email" name="email" placeholder="Email" required
-            class="mt-1 block w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-all" />
+    <!-- Mobile Cards -->
+    <div class="md:hidden space-y-4">
+      <?php foreach ($products as $product): ?>
+        <div class="bg-white/80 backdrop-blur-md shadow-lg rounded-xl p-4 border border-slate-200">
+          <div class="text-sm font-semibold text-slate-500 mb-1">Produit #<?= htmlspecialchars($product['id']) ?></div>
+          <div class="text-lg font-bold text-slate-800"><?= htmlspecialchars($product['name']) ?></div>
+          <div class="text-slate-600 mb-2"><?= htmlspecialchars($product['price']) ?> €</div>
+          <div class="mb-3">
+            <?php if ($product['stock_quantity'] > 10): ?>
+              <span class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-semibold animate-pulse">
+                🟢 En stock
+              </span>
+            <?php elseif ($product['stock_quantity'] > 0): ?>
+              <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-600 rounded-full text-xs font-semibold">
+                🟡 Limité
+              </span>
+            <?php else: ?>
+              <span class="inline-flex items-center gap-1 px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-xs font-semibold">
+                🔴 Rupture
+              </span>
+            <?php endif; ?>
+          </div>
+          <div class="flex justify-end gap-4 text-sm font-medium">
+            <a href="/boutique-en-ligne/admin/products/edit/<?= $product['id'] ?>" class="text-indigo-600 hover:underline">Modifier</a>
+            <a href="/boutique-en-ligne/admin/products/delete/<?= $product['id'] ?>" onclick="return confirm('Supprimer ce produit ?');" class="text-rose-600 hover:underline">Supprimer</a>
+          </div>
         </div>
-
-        <div>
-          <input type="password" name="password" placeholder="Mot de passe" required
-            class="mt-1 block w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500 transition-all" />
-        </div>
-
-        <div>
-          <button type="submit"
-            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Connexion
-          </button>
-        </div>
-      </form>
-
-      <div class="mt-6 text-center">
-        <p class="text-sm text-gray-600">
-          Pas encore de compte ?
-          <a href="/boutique-en-ligne/register" class="font-medium text-blue-600 hover:text-blue-500">
-            Inscription
-          </a>
-        </p>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </div>
 
-
-
+   
 <footer class="bg-gray-900 text-white w-full">
   <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16">
     
