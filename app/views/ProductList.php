@@ -389,6 +389,51 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.classList.toggle('hidden');
     });
   </script>
+  <script>
+  // === Desktop ===
+  const sexBtn     = document.getElementById('sexBtn');
+  const sexMenu    = document.getElementById('sexMenu');
+
+  sexBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = sexBtn.getAttribute('aria-expanded') === 'true';
+
+    sexBtn.setAttribute('aria-expanded', String(!isOpen));
+    sexMenu.classList.toggle('opacity-0');
+    sexMenu.classList.toggle('pointer-events-none');
+    sexMenu.classList.toggle('opacity-100');
+    sexMenu.classList.toggle('pointer-events-auto');
+  });
+
+  // Fermer si on clique en dehors
+  document.addEventListener('click', e => {
+    if (!sexBtn.contains(e.target) && !sexMenu.contains(e.target)) {
+      sexBtn.setAttribute('aria-expanded', 'false');
+      sexMenu.classList.add('opacity-0', 'pointer-events-none');
+      sexMenu.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+  });
+
+  // === Mobile ===
+  const sexBtnMobile  = document.getElementById('sexBtnMobile');
+  const sexMenuMobile = document.getElementById('sexMenuMobile');
+
+  sexBtnMobile.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = sexBtnMobile.getAttribute('aria-expanded') === 'true';
+
+    sexBtnMobile.setAttribute('aria-expanded', String(!isOpen));
+    sexMenuMobile.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', e => {
+    if (!sexBtnMobile.contains(e.target) && !sexMenuMobile.contains(e.target)) {
+      sexBtnMobile.setAttribute('aria-expanded', 'false');
+      sexMenuMobile.classList.add('hidden');
+    }
+  });
+</script>
+
 </body>
 </html>
 
