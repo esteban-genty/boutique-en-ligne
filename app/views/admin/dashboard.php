@@ -24,10 +24,11 @@
 
 <header class="relative h-[75vh] overflow-hidden">
 
-<video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
-  <source src="./public/assets/img/accueil.mp4" type="video/mp4">
+<video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted playsinline>
+<source src="../../../public/assets/img/accueil.mp4" type="video/mp4" />
 
 </video>
+
 
 
 
@@ -198,10 +199,10 @@ sexBtnMobile.addEventListener('click', () => {
 
 </header>
 <body class="bg-gray-50 font-sans">
-    <!-- Navigation/Breadcrumb -->
+    <!-- Navigation -->
     <div class="container mx-auto px-4 py-4 text-gray-600">
         <nav class="text-sm">
-            <a href="#" class="hover:text-blue-600">Accueil</a>
+            <a href="/boutique-en-ligne/home" class="hover:text-blue-600">Accueil</a>
             <span class="mx-1">/</span>
             <span>Tableau de bord Admin</span>
         </nav>

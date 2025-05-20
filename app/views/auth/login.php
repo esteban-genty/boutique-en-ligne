@@ -200,8 +200,8 @@ sexBtnMobile.addEventListener('click', () => {
 
 <div class="flex flex-col md:flex-row min-h-screen">
   <!-- IMAGE -->
-  <div class="md:w-1/2 bg-gray-800 hidden md:block">
-    <img src="" alt="Connexion Image" class="h-full w-full object-cover" />
+  <div class="md:w-2/7 bg-gray-800 hidden md:block">
+    <img src="./public/assets/img/tendances-homme.jpg" alt="Connexion Image" class="h-[200] w-[200] object-cover" />
   </div>
 
   <!-- FORMULAIRE -->

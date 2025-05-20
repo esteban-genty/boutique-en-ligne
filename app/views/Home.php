@@ -281,50 +281,52 @@ sexBtnMobile.addEventListener('click', () => {
         <span class="text-3xl font-bold text-blue-400">OMNI</span>
         <span class="h-8 border-r-2 border-blue-400 ml-6"></span>
       </div>
+      <form action="https://formspree.io/f/xrbqdbrz" method="POST" class="w-full">
+        <h4 class="text-xl font-semibold w-full text-gray-300 mb-4">Contactez-nous</h4>
 
-      <h4 class="text-xl font-semibold w-full text-gray-300">Contactez-nous</h4>
+        <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
+          <input
+            type="email"
+            name="email"
+            placeholder="Mon email"
+            required
+            class="flex-1 bg-transparent border-2 border-white rounded-full px-6 py-3 placeholder-gray-300 focus:outline-none text-white w-full"
+          />
+          <button
+            type="submit"
+            aria-label="Envoyer"
+            class="w-12 h-12 flex items-center justify-center border-2 border-white rounded-full hover:bg-white/20 transition flex-shrink-0"
+          >
+            <i class="fas fa-arrow-right text-white"></i>
+          </button>
+        </div>
 
-      <div class="flex items-center space-x-4 w-full">
         <input
-          type="email"
-          placeholder="Mon email"
+          type="text"
+          name="message"
+          placeholder="Mon message"
           required
-          class="flex-1 bg-transparent border-2 border-white rounded-full px-6 py-3 placeholder-gray-300 focus:outline-none text-white w-full"
+          class="w-full mt-4 bg-transparent border-2 border-white rounded-full px-6 py-3 placeholder-gray-300 focus:outline-none text-white"
         />
-        <button
-          type="submit"
-          aria-label="Envoyer"
-          class="w-12 h-12 flex items-center justify-center border-2 border-white rounded-full hover:bg-white/20 transition flex-shrink-0"
-        >
-          <i class="fas fa-arrow-right text-white"></i>
-        </button>
-      </div>
-
-      <input
-        type="text"
-        placeholder="Mon message"
-        required
-        class="w-full bg-transparent border-2 border-white rounded-full px-6 py-3 placeholder-gray-300 focus:outline-none text-white"
-      />
-    </div>
-    
-    <div class="flex flex-col space-y-6 w-full">
-      <h4 class="text-xl font-semibold text-gray-300">Informations Légales</h4>
-      <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
-      </ul>
+      </form>
     </div>
 
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">Informations Légales</h4>
       <ul class="space-y-3">
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
-        <li><a href="#" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
+        <li><a href="./app/views/charte.html" class="text-base hover:text-blue-400 transition">Charte de Confidentialité</a></li>
+        <li><a href="./app/views/mention.html" class="text-base hover:text-blue-400 transition">Mentions Légales</a></li>
+        <li><a href="./app/views/conditions" class="text-base hover:text-blue-400 transition">Conditions générales de ventes</a></li>
       </ul>
     </div>
+
+<div class="flex flex-col space-y-6 w-full">
+  <h4 class="text-xl font-semibold text-gray-300">À propos</h4>
+  <p class="text-base text-gray-400">
+    OMNI est une marque engagée dans la qualité et le style, proposant des vêtements sportswear modernes et confortables.
+  </p>
+</div>
+
 
     <div class="flex flex-col space-y-6 w-full">
       <h4 class="text-xl font-semibold text-gray-300">La marque</h4>
@@ -338,6 +340,7 @@ sexBtnMobile.addEventListener('click', () => {
     <p class="text-base text-gray-300">&copy; 2025 Sébastien, Esteban, Lamine</p>
   </div>
 </footer>
+
 
 
   <!-- Burger Menu JS -->

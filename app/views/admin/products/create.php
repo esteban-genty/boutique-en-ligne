@@ -200,6 +200,7 @@ sexBtnMobile.addEventListener('click', () => {
 <!----------------------------------- MAIN CONTENT--------------------->
 
 <div class="min-h-screen bg-slate-50 py-12 px-6">
+
   <div class="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-10 border border-slate-200">
     <h2 class="text-3xl font-bold text-slate-800 mb-6"> Ajouter un produit</h2>
 

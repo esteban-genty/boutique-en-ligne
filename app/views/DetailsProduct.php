@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -219,35 +220,32 @@ sexBtnMobile.addEventListener('click', () => {
                                       </div>
                                   </div>
 
-                            <!-- Quantité en stock -->
-                            <div class="stock-info">
-                                <?php
-                                    // Vérifie si 'stock_quantity' existe et est non null, sinon affiche "Non disponible"
-                                    $stockQuantity = isset($product['stock_quantity']) ? $product['stock_quantity'] : 'Non disponible';
-                                ?>
-                                <p><strong>En stock :</strong> <?= htmlspecialchars($stockQuantity) ?> </p>
-                            </div>
+                          
         </div>
     </div>
 
-    <?php if (!empty($suggestions)): ?>
-        <div class="suggestions-section">
-            <h2 class="section-title">Suggestions :</h2>
-            <div class="suggestions-grid">
-                <?php foreach ($suggestions as $suggestion): ?>
-                    <div class="suggestion-card">
-                        <a href="index.php?controller=product&action=details&id=<?= $suggestion['id'] ?>">
-                            <img src="<?= htmlspecialchars($suggestion['image_url']) ?>" alt="<?= htmlspecialchars($suggestion['name']) ?>">
-                        </a>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+<?php if (!empty($suggestions)): ?>
+    <div class="suggestions-section">
+        <h2 class="section-title">Suggestions  :</h2>
+        <div class="suggestions-grid">
+            <?php foreach ($suggestions as $suggestion): ?>
+                <div class="suggestion-card">
+                    <a href="index.php?controller=product&action=details&id=<?= $suggestion['id'] ?>">
+                        <img src="<?= htmlspecialchars($suggestion['image_url']) ?>" alt="<?= htmlspecialchars($suggestion['name']) ?>">
+                        <div class="suggestion-info">
+                            <h3><?= htmlspecialchars($suggestion['name']) ?></h3>
+                            <p class="price"><?= number_format($suggestion['price'], 2, ',', ' ') ?> €</p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php else: ?>
-        <div class="alert alert-info mt-5" role="alert">
-            Aucune suggestion pour ce produit.
-        </div>
-    <?php endif; ?>
+    </div>
+<?php else: ?>
+    <div class="alert alert-info mt-5" role="alert">
+        Aucune suggestion pour ce produit.
+    </div>
+<?php endif; ?>
 </div>
 
 
