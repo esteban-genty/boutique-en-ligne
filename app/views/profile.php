@@ -37,7 +37,7 @@
 <nav class="absolute inset-x-0 top-0 z-20">
   <div class="max-w-7xl mx-auto flex items-center justify-between p-6">
    
-    <div class="text-2xl font-bold text-white"><a href="/boutique-en-ligne"></a>OMNI</div>
+    <div class="text-2xl font-bold text-white"><a href="/boutique-en-ligne/home">OMNI</a></div>
 
     <ul class="hidden md:flex space-x-8 text-white items-center">
       <li><a href="/boutique-en-ligne/index.php?controller=product&action=index&category=all" class="hover:opacity-80">Collection</a></li>
@@ -201,7 +201,7 @@ sexBtnMobile.addEventListener('click', () => {
     <!-- Navigation/Breadcrumb -->
     <div class="container mx-auto px-4 py-4 text-gray-600">
         <nav class="text-sm">
-            <a href="#" class="hover:text-blue-600">Accueil</a>
+            <a href="/boutique-en-ligne/home" class="hover:text-blue-600">Accueil</a>
             <span class="mx-1">/</span>
             <span>Mon Profil</span>
         </nav>
